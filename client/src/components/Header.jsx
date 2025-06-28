@@ -9,6 +9,7 @@ const Header = () => {
           <p>New: AI feature integrated</p>
           <img src={assets.star_icon} className='w-2.5' alt="" />
         </div>
+        <h1 className='text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700'>Your own blogging platfrom.</h1>
       </div>
       <img 
         src={assets.gradientBackground} 
