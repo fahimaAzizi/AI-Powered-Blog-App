@@ -1,14 +1,16 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Blog from './assets/pages/Blog';
-import Home from './assets/pages/Home';
+import Blog from './pages/Blog'
+import Home from './pages/Home'
 
 const App = () => {
   return (
+  <div>
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/blog' element={<Blog />} />
     </Routes>
+  </div>
   );
 };
 
