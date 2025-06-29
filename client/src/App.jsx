@@ -1,17 +1,11 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Blog from './pages/Blog'
-import Home from './pages/Home'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import {BrowserRouter} from 'react-router-dom'
 
-const App = () => {
-  return (
-  <div>
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/blog' element={<Blog />} />
-    </Routes>
-  </div>
-  );
-};
-
-export default App;
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+)
+ 
