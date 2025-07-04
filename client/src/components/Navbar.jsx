@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Link } from 'react-router-dom';
+import {  Link, navigate, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
-import { MenuIcon, SearchIcon, XIcon } from 'lucide-react';
+import { MenuIcon, SearchIcon, TicketPlus, XIcon } from 'lucide-react';
 import {useClerk ,UserButton ,useUser} from '@clerk/clerk-react'
 
 const  Navbar = () => {
@@ -9,6 +9,9 @@ const  Navbar = () => {
   const [isOpen , setIsOpen] = useState(false)
   const {user} =useUser()
   const{openSignIn} =useClerk()
+
+
+  const Navigate = useNavigate()
 
 
 
@@ -39,8 +42,13 @@ const  Navbar = () => {
           Login
         </button>
           ) :(
-            <UserButton/>
-          )
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Action label='My Bokkings' labelIcon={<TicketPlus width={15}/> }onClick={()=> navigate
+                  ('/My_bookings')}/>
+              </UserButton.MenuItems>
+            </UserButton>         
+           )
         }
        
       </div>
