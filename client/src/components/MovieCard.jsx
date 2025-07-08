@@ -1,3 +1,4 @@
+import { StarIcon } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -24,29 +25,19 @@ const MovieCard = ({ movie }) => {
         {movie.genres.slice(0, 2).map(genre => genre.name).join(' | ')} •{' '}
         {movie.runtime}
       </p>
-      <div>
-        <button >
+      <div className='flx items-center justify-btween mt-4 pb-3'>
+        <button onClick={()=>{navigate(`/movies/${movie._id}`),scrollTo(0,0)}}
+          className='px-4 py-2 text-xs bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer'>Buy tickets
 
         </button>
+        <p className='flrx items-center gap-1 text-gray-400 mt-1 pr-1'><StarIcon className="w-4 h-4 text-primary"/>
+        {movie.vote_average.toFixed(1)}</p>
       </div>
     </div>
   );
 };
 
-// Optional: Define expected props for better safety
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    backdrop_path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    release_date: PropTypes.string.isRequired,
-    genres: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    runtime: PropTypes.number.isRequired,
-  }).isRequired,
-};
+
+
 
 export default MovieCard;
