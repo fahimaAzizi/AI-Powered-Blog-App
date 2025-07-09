@@ -1,0 +1,3 @@
+const timeFormat =(minutes)=>{
+    
+}
