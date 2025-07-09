@@ -2,6 +2,7 @@ import { StarIcon } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import timeFormat from '../lib/timeFormat';
 
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const MovieCard = ({ movie }) => {
       <p className='text-sm text-gray-400 mt-2'>
         {new Date(movie.release_date).getFullYear()} •{' '}
         {movie.genres.slice(0, 2).map(genre => genre.name).join(' | ')} •{' '}
-        {movie.runtime}
+        {timeFormat(movie.runtime)}
       </p>
       <div className='flx items-center justify-btween mt-4 pb-3'>
         <button onClick={()=>{navigate(`/movies/${movie._id}`),scrollTo(0,0)}}
