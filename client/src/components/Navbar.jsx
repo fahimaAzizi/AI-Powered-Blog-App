@@ -25,11 +25,11 @@ const  Navbar = () => {
 
       <div className='max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300'>
         <XIcon className='md:hidden absolute top-6 right-6 w-6 h-6 cursor-pointer' />
-        <Link to='/'>Home</Link>
-        <Link to='/movies'>Movies</Link>
-        <Link to='/'>Theaters</Link>
-        <Link to='/'>Releases</Link>
-        <Link to='/favorite'>Favorites</Link>
+        <Link onClick={()=>{scrollTo(0,0) ;setIsOpen(false)}} to='/'>Home</Link>
+        <Link onClick={()=>{scrollTo(0,0) ;setIsOpen(false)}}  to='/movies'>Movies</Link>
+        <Link onClick={()=>{scrollTo(0,0) ;setIsOpen(false)}}  to='/'>Theaters</Link>
+        <Link onClick={()=>{scrollTo(0,0) ;setIsOpen(false)}}  to='/'>Releases</Link>
+        <Link onClick={()=>{scrollTo(0,0) ;setIsOpen(false)}}  to='/favorite'>Favorites</Link>
       </div>
 
       <div>
