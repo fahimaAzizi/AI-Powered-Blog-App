@@ -18,6 +18,7 @@ const TrailerSection = () => {
         <ReactPlayer
           url={currentTrailer.videoUrl}
           controls={false}
+          playing={true}  // ✅ makes it autoplay!
           className='mx-auto max-w-full'
           width='960px'
           height='540px'
@@ -26,7 +27,9 @@ const TrailerSection = () => {
 
       <div className='group grid grid-cols-4 gap-4 md:gap-8 mt-8 max-w-3xl mx-auto'>
         {dummyTrailers.map((trailer) => (
-          <div key={trailer.image} className='relative cursor-pointer'
+          <div
+            key={trailer.id}   // ✅ best practice if you have IDs
+            className='relative cursor-pointer'
             onClick={() => setCurrentTrailer(trailer)}
           >
             <img
