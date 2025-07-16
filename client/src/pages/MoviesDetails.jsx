@@ -14,12 +14,13 @@ const MoviesDetails = () => {
 
   useEffect(()=>{
     getShow()
-  },(id))
-  return (
-    <div>
+  },[id])
+  return Show ?(
+    <div className=''>
 
     </div>
-  )
+  ): <div>Losding...</div>
+
 }
 
 export default MoviesDetails
