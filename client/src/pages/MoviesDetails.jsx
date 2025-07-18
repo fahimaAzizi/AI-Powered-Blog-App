@@ -51,11 +51,13 @@ const MoviesDetails = () => {
               <PlayCircleIcon className='w-5 h-5' />
               Watch Trailer
             </button>
-            <a href="#" className='text-blue-500 underline'>Buy Tickets</a>
+            <a href="#dateSelect" className='text-blue-500 underline'>Buy Tickets</a>
             <Heart className='w-5 h-5 text-red-500 cursor-pointer' />
           </div>
         </div>
       </div>
+      <p> Your Favorite Cast</p>
+      <div className=' overflow-x-auto no-scrollbar mt-8 pb-4'></div>
     </div>
   ) : (
     <div>Loading...</div>
