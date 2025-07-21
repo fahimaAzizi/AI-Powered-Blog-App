@@ -1,6 +1,6 @@
 import React from 'react'
 import BlurCircle from './BlurCircle'
-
+import {ChevronRightIcon ,ChevronLeftIcon} from "lucide-react"
 
 const DateSelect = ({dateTime ,id}) => {
   return (
@@ -25,9 +25,10 @@ const DateSelect = ({dateTime ,id}) => {
             ))} 
             </span>
 
-            
+            <ChevronRightIcon width={28} />
         </div>
        </div>
+       <button >Book New</button>
       </div>
   
     </div>
