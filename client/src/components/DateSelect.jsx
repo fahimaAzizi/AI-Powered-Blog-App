@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BlurCircle from './BlurCircle'
 import {ChevronRightIcon ,ChevronLeftIcon} from "lucide-react"
+import toast from 'react-hot-toast'
 
 const DateSelect = ({dateTime ,id}) => {
+  const[selected ,setSelected] =useState(null)
+
+   const onBookHandler =()=>{
+    if (!selected){
+      return toast('please select a date')
+    }
+   }
+
+
+
   return (
     <div id='dateStelect' className='pt-30'>
       <div className='flex flex-col md:flex-row items-center justify-berween gap-10 relative p-8 bg-primary/10 border border-primary/20 rounded-lg'>
