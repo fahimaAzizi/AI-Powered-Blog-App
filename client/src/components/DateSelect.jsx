@@ -27,7 +27,8 @@ const DateSelect = ({dateTime ,id}) => {
           <ChevronLeftIcon width={28} />
           <span className='grid grid-cols-3 md:flex-wrap md:max-w-lg gap-4'>
             {Object.keys(dateTime).map((date)=>(
-            <button key={date} className='flex flex-col items-center justify-center h-4 w-14 aspect-square rounded cursor-pointer'>
+            <button key={date} className={`flex flex-col items-center justify-center h-4 w-14 aspect-square rounded cursor-pointer
+            ${selected === date? "bg-primary text-white":" border border-primary/70"}`}>
           
          
           <span>{new Date(date).getDate()}</span>
