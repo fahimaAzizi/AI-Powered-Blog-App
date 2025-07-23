@@ -15,7 +15,7 @@ const MoviesDetails = () => {
     if (!foundShow) return
     setShow({
       movie: foundShow,
-      dataTime: dummyDateTimeData
+      dateTime: dummyDateTimeData // ✅ FIXED typo here
     })
   }
 
@@ -24,7 +24,7 @@ const MoviesDetails = () => {
   }, [id])
 
   return show ? (
-    <div className='px-6 md:px-16 lg:px-40 pt-30 md:pt-50'>
+    <div className='px-6 md:px-16 lg:px-40 pt-[120px] md:pt-[200px]'>
       <div className='flex flex-col md:flex-row gap-8 max-w-6xl mx-auto'>
         <img
           src={show.movie.poster_path}
@@ -57,18 +57,25 @@ const MoviesDetails = () => {
           </div>
         </div>
       </div>
-      <p className='text-lg font-medium mt-20'> Your Favorite Cast</p>
-      <div className=' overflow-x-auto no-scrollbar mt-8 pb-4'>
-        <div className='flex item-center gap-4 w-max px-4'>
-          {show.movie.casts.slice(0,12).map((cast,index)=>(
-            <div key={index} className=' flex flex-col items-center text-center'>
-              <img src={cast.profile_path} alt="" className='rounded-full h-20 md:h-20 aspect-square object-cover' />
-              <p className='font-medium text-xs' >{cast.name}</p>
+
+      <p className='text-lg font-medium mt-20'>Your Favorite Cast</p>
+      <div className='overflow-x-auto no-scrollbar mt-8 pb-4'>
+        <div className='flex items-center gap-4 w-max px-4'>
+          {show.movie.casts.slice(0, 12).map((cast, index) => (
+            <div key={index} className='flex flex-col items-center text-center'>
+              <img
+                src={cast.profile_path}
+                alt={cast.name}
+                className='rounded-full h-20 md:h-20 aspect-square object-cover'
+              />
+              <p className='font-medium text-xs'>{cast.name}</p>
             </div>
           ))}
         </div>
       </div>
-      <DateSelect dateTime={show.dateTime} id={id}/>
+
+      {/* ✅ Pass corrected prop to DateSelect */}
+      <DateSelect dateTime={show.dateTime} id={id} />
     </div>
   ) : (
     <div>Loading...</div>
