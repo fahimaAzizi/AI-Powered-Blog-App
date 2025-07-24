@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { dummyDateTimeData, dummyShowsData } from '../assets/assets'
 import BlurCircle from '../components/BlurCircle'
 import { Heart, PlayCircleIcon, StarIcon } from 'lucide-react'
 import timeFormat from '../lib/timeFormat'
 import DateSelect from '../components/DateSelect'
+import MovieCard from '../components/MovieCard' // ✅ required import
 
 const MoviesDetails = () => {
+  const navigate = useNavigate()
   const { id } = useParams()
   const [show, setShow] = useState(null)
 
@@ -15,7 +17,7 @@ const MoviesDetails = () => {
     if (!foundShow) return
     setShow({
       movie: foundShow,
-      dateTime: dummyDateTimeData // ✅ FIXED typo here
+      dateTime: dummyDateTimeData
     })
   }
 
@@ -74,20 +76,26 @@ const MoviesDetails = () => {
         </div>
       </div>
 
-      {/* ✅ Pass corrected prop to DateSelect */}
+      {/* ✅ Date selection */}
       <DateSelect dateTime={show.dateTime} id={id} />
-     <p className='text-lg font-medium mt-20 mb-8'>You May Also Like</p>
-<div className='flex flex-wrap max-sm:justify-center gap-8'>
-  {dummyShowsData.slice(0, 4).map((movie, index) => (
-    <MovieCard key={index} movie={movie} />
-  ))}
-</div>
 
-<div className='flex justify-center mt-20'>
-  <button className='px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-md font-medium cursor-pointer'>
-    Show more
-  </button>
-</div>
+      {/* ✅ Movie suggestions */}
+      <p className='text-lg font-medium mt-20 mb-8'>You May Also Like</p>
+      <div className='flex flex-wrap max-sm:justify-center gap-8'>
+        {dummyShowsData.slice(0, 4).map((movie, index) => (
+          <MovieCard key={index} movie={movie} />
+        ))}
+      </div>
+
+      {/* ✅ Show more button */}
+      <div className='flex justify-center mt-20'>
+        <button
+          onClick={() => navigate('/movies')}
+          className='px-10 py-3 text-sm bg-primary hover:bg-primary/80 transition rounded-md font-medium cursor-pointer'
+        >
+          Show more
+        </button>
+      </div>
     </div>
   ) : (
     <div>Loading...</div>
