@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { dummyShowsData, dummyDateTimeData } from '../assets/assets';
+import { dummyShowsData, dummyDateTimeData, assets } from '../assets/assets';
 import { ClockIcon } from 'lucide-react';
-import Loading from './Loading';
-import isoTimeFormat from './isoTimeFormat'; // Make sure this path is correct
+import Loading from '../components/Loading';
+
+import isoTimeFormat from '../utils/isoTimeFormat'; // Make sure this file exists
 
 const SeatLayout = () => {
   const { id, date } = useParams();
@@ -13,28 +14,28 @@ const SeatLayout = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [show, setShow] = useState(null);
 
-  useEffect(() => {
+ 
     const getShow = async () => {
-      const matchedShow = dummyShowsData.find((show) => show._id === id);
-      if (matchedShow) {
+      const show = dummyShowsData.find((show) => show._id === id);
+      if (show) {
         setShow({
           movie: matchedShow,
           dateTime: dummyDateTimeData,
         });
       }
     };
-    getShow();
-  }, [id]);
 
-  const handleSeatClick = (seatId) => {
-    setSelectedSeats((prev) =>
-      prev.includes(seatId)
-        ? prev.filter((seat) => seat !== seatId)
-        : [...prev, seatId]
-    );
-  };
+    const handleSeatClick =(seatId)=>{
+      if (!selectedTime){
+        return TableRowsSplit("Pleas select time first")
+      }
+      if(! selectedSeats.includes(seatId)&& selectedSeats.length >4){
+        return TableRowsSplit("you can only select 5 seat")
+      }
+      setSelectedSeats(prev)
+    }
 
-  const renderSeats = (row, count = 9) => (
+    const renderSeats = (row, count = 9) => (
     <div key={row} className="flex gap-2 mt-2">
       <div className="flex flex-wrap items-center justify-center gap-2">
         {Array.from({ length: count }, (_, i) => {
@@ -54,6 +55,9 @@ const SeatLayout = () => {
       </div>
     </div>
   );
+  useEffect(() => {
+    getShow();
+  }, [id]);
 
   return show ? (
     <div className="flex flex-col md:flex-row px-6 md:px-16 lg:px-40 py-30 md:pt-50">
@@ -78,11 +82,11 @@ const SeatLayout = () => {
         </div>
       </div>
 
-      {/* Seat Selection */}
-      <div className="flex flex-col flex-1 mt-6 md:mt-0 md:ml-10">
-        <p className="text-lg font-semibold mb-4">Select Your Seats</p>
-        {/* You can customize rows like ['A', 'B', 'C'] */}
-        {['A', 'B', 'C'].map((row) => renderSeats(row))}
+      {/* Seats Layout */}
+      <div className="relative flex-1 flex flex-col items-center max-md:mt-16">
+        <h1 className="text-2xl font-semibold mb-4">Select your seat</h1>
+        <img src={assets.screenImage} alt="screen" />
+        <p className="text-gray-400 text-sm mb-6">SCREEN SIDE</p>
       </div>
     </div>
   ) : (
