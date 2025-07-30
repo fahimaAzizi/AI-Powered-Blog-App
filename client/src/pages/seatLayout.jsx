@@ -3,8 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { dummyShowsData, dummyDateTimeData, assets } from '../assets/assets';
 import { ClockIcon } from 'lucide-react';
 import Loading from '../components/Loading';
-
+import BlurCircle from '../components/BlurCircle'
 import isoTimeFormat from '../utils/isoTimeFormat'; // Make sure this file exists
+import toast from 'react-hot-toast'
+
+
+
 
 const SeatLayout = () => {
   const { id, date } = useParams();
@@ -32,7 +36,7 @@ const SeatLayout = () => {
       if(! selectedSeats.includes(seatId)&& selectedSeats.length >4){
         return TableRowsSplit("you can only select 5 seat")
       }
-      setSelectedSeats(prev)
+      setSelectedSeats(prev => prev.includes(seatId) ? prev.filter(seat => seat !== seatId ) : [...prev ,seatId])
     }
 
     const renderSeats = (row, count = 9) => (
@@ -87,7 +91,14 @@ const SeatLayout = () => {
         <h1 className="text-2xl font-semibold mb-4">Select your seat</h1>
         <img src={assets.screenImage} alt="screen" />
         <p className="text-gray-400 text-sm mb-6">SCREEN SIDE</p>
-      </div>
+        <div className='flex flex-col items-center mt-10 text-xs text-gray-300'>
+          <div className=''>
+            {grounpRows[0].map(row => renderSeats(row))}
+          </div>
+          
+        </div>
+     
+     </div>
     </div>
   ) : (
     <Loading />
