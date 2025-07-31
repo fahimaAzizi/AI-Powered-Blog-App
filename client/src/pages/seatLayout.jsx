@@ -5,7 +5,7 @@ import { ClockIcon } from 'lucide-react';
 import Loading from '../components/Loading';
 import BlurCircle from '../components/BlurCircle'
 import isoTimeFormat from '../utils/isoTimeFormat';
-import toast from 'react-hot-toast'
+
 
 
 
@@ -88,6 +88,8 @@ const SeatLayout = () => {
 
       {/* Seats Layout */}
       <div className="relative flex-1 flex flex-col items-center max-md:mt-16">
+          <BlurCircle top='-100px' left='-100px'/>
+          <BlurCircle bottom='0' right='0'/>
         <h1 className="text-2xl font-semibold mb-4">Select your seat</h1>
         <img src={assets.screenImage} alt="screen" />
         <p className="text-gray-400 text-sm mb-6">SCREEN SIDE</p>
@@ -96,8 +98,9 @@ const SeatLayout = () => {
             {grounpRows[0].map(row => renderSeats(row))}
           </div>
         </div>
-         <div>
+         <div className='relative flex-1 flex flex-col items-center max-md:mt16'>
           
+
          </div>
      </div>
     </div>

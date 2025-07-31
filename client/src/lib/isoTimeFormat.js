@@ -6,6 +6,6 @@ const isoTimeFormat = (dateTime) => {
     hour12: true,
   });
   return localTime;
-}
 
+}
 export default isoTimeFormat;
