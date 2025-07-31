@@ -5,25 +5,28 @@ import { ClockIcon } from 'lucide-react';
 import Loading from '../components/Loading';
 import BlurCircle from '../components/BlurCircle'
 import isoTimeFormat from '../utils/isoTimeFormat';
+import toast from 'react-hot-toast'
 
 
 
+ const SeatLayout = () => {
+  const groupRows =[["A","B"],["C","D"],["E","F"],["G","H"],["I","J"]]
 
 
-const SeatLayout = () => {
-  const { id, date } = useParams();
-  const navigate = useNavigate();
 
+  const { id, date } = useParams()
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedTime, setSelectedTime] = useState(null);
   const [show, setShow] = useState(null);
-
+  
+  
+  const navigate = useNavigate();
  
     const getShow = async () => {
       const show = dummyShowsData.find((show) => show._id === id);
       if (show) {
         setShow({
-          movie: matchedShow,
+          movie:show,
           dateTime: dummyDateTimeData,
         });
       }
@@ -31,10 +34,10 @@ const SeatLayout = () => {
 
     const handleSeatClick =(seatId)=>{
       if (!selectedTime){
-        return TableRowsSplit("Pleas select time first")
+        return toast("Pleas select time first")
       }
       if(! selectedSeats.includes(seatId)&& selectedSeats.length >4){
-        return TableRowsSplit("you can only select 5 seat")
+        return toast("you can only select 5 seat")
       }
       setSelectedSeats(prev => prev.includes(seatId) ? prev.filter(seat => seat !== seatId ) : [...prev ,seatId])
     }
@@ -95,13 +98,17 @@ const SeatLayout = () => {
         <p className="text-gray-400 text-sm mb-6">SCREEN SIDE</p>
         <div className='flex flex-col items-center mt-10 text-xs text-gray-300'>
           <div className='grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-2 mb-6'>
-            {grounpRows[0].map(row => renderSeats(row))}
-          </div>
+            {groupRows[0].map(row => renderSeats(row))}
+          </div> 
+          <div className='grid grid-cols-2 gap-11'>
+           {groupRows.slice(1).map((group ,idx)=>(
+            <div key={idx}>
+              {group.map(row => renderSeats(row))}
+            </div>
+           ))}
         </div>
-         <div className='relative flex-1 flex flex-col items-center max-md:mt16'>
-          
-
          </div>
+
      </div>
     </div>
   ) : (
