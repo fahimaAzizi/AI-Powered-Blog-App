@@ -1,31 +1,36 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
+import { useEffect } from 'react';
 
-import { ClockIcon } from 'lucide-react'
+import { ArrowRightIcon, ClockIcon } from 'lucide-react'
 import isoTimeFormat from '../lib/isoTimeFormat'
+import { dummyDateTimeData, dummyShowsData,assets } from '../assets/assets'
+import toast from 'react-hot-toast';
+import BlurCircle from '../components/BlurCircle';
+
+
 
 const SeatLayout = () => {
+  const groupRows = [["A", "B"], ["C", "D"], ["E", "F"], ["G", "H"], ["I", "J"]];
   const{id ,date} = useParams()
   const [selectedSeats , setSelectedSeats] =useState([])
   const [selectedTime, setSelectedTime] =useState(null)
    const [show, setShow] =useState(null)
    const navigate =useNavigate()
 
-const getShow = async () => {
-  const show = dummyShowsData.find((show) => show._id === id);
-  if (show) {
-    setShow({
-      movie: show,
-      dateTime: dummyDateTimeData,
-    });
+  const getShow = async () =>{
+    const show = dummyShowsData.find((show) => show._id === id);
+    if (show) {
+      setShow({
+        movie: show,
+        dateTime: dummyDateTimeData
+      });
+    }
   }
-};
-
-useEffect(() => {
-  getShow();
-}, []);
-
+  useEffect(()=>{
+    getShow()
+  },[])
 
   return  show ?(
     <div className='flex flex-col md:flex-row px-6 md:px-16 lg:px-40 py-30 md:pt-50' >
@@ -52,9 +57,35 @@ useEffect(() => {
           ))}
       </div>
      </div>
-     <div>
+     {/* Seats Layout */}
+      <div className="relative flex-1 flex flex-col items-center max-md:mt-16">
+        <BlurCircle top='-100px' left='-100px' />
+        <BlurCircle bottom='0' right='0' />
+        <h1 className="text-2xl font-semibold mb-4">Select your seat</h1>
+        <img src={assets.screenImage} alt="screen" />
+        <p className="text-gray-400 text-sm mb-6">SCREEN SIDE</p>
+        <div className='flex flex-col items-center mt-10 text-xs text-gray-300'>
+          <div className='grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-2 mb-6'>
+            {groupRows[0].map(row => renderSeats(row))}
+          </div> 
+          <div className='grid grid-cols-2 gap-11'>
+            {groupRows.slice(1).map((group, idx) => (
+              <div key={idx}>
+                {group.map(row => renderSeats(row))}
+              </div>
+            ))}
+          </div>
+        </div>
 
-     </div>
+        {/* Proceed Button */}
+        <button 
+          onClick={handleProceed}
+          className='flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer active:scale-95'
+        >
+          Proceed to Checkout
+          <ArrowRightIcon strokeWidth={3} className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   ):(
     <Loading/>
