@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { renderMatches, useNavigate, useParams } from 'react-router-dom'
+import React, { useState , useEffect} from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
 import { useEffect } from 'react';
 
@@ -29,6 +29,18 @@ const SeatLayout = () => {
       });
     }
   }
+    const handleSeatClick =(seatId)=>{
+      if (!selectedTime){
+        return toast("Pleas select time first")
+      }
+      if(! selectedSeats.includes(seatId)&& selectedSeats.length >4){
+        return toast("you can only select 5 seat")
+      }
+      setSelectedSeats(prev => prev.includes(seatId) ? prev.filter(seat => seat !== seatId ) : [...prev ,seatId])
+    }
+
+
+
   const renderSeats = (row, count = 9) => (
     <div key={row} className="flex gap-2 mt-2">
       <div className="flex flex-wrap items-center justify-center gap-2">
@@ -39,7 +51,7 @@ const SeatLayout = () => {
               key={seatId}
               onClick={() => handleSeatClick(seatId)}
               className={`h-8 w-8 rounded border border-primary-60 cursor-pointer ${
-                selectedSeats.includes(seatId) ? 'bg-primary text-white' : ''
+                selectedSeats.includes(seatId) && 'bg-primary text-white'
               }`}
             >
               {seatId}
