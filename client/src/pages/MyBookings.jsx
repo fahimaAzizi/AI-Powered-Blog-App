@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { dummyBookingData } from '../assets/assets';
 
 const MyBookings = () => {
-  const currency = import.meta.env.VITE_CURRENCY
-  const [bookings ,setBooking] =useState([])
-  const [isLoading ,setIsLoading] =useState([true])
-  
+  const currency = import.meta.env.VITE_CURRENCY;
 
-  const getMyBookings = async
+  const [bookings, setBookings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getMyBookings = async () => {
+    setBookings(dummyBookingData);
+    setIsLoading(false);
+  };
 
   return (
     <div>
-
+      {/* JSX output here */}
     </div>
-  )
-}
-
-export default MyBookings
+  );
+};
