@@ -23,7 +23,11 @@ const MyBookings = () => {
       </div>
       <h1 className='text-lg font-semibold md-4'> My Bookings</h1>
       {
-        
+        bookings.map((item ,index)=>(
+         <div>
+
+         </div>
+        ))
       }
     </div>
   ): <Loading/>
