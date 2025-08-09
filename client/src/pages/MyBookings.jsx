@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { dummyBookingData } from '../assets/assets';
+import Loading from '../components/Loading';
 
 const MyBookings = () => {
   const currency = import.meta.env.VITE_CURRENCY;
@@ -24,13 +25,16 @@ const MyBookings = () => {
       <h1 className='text-lg font-semibold md-4'> My Bookings</h1>
       {
         bookings.map((item ,index)=>(
-         <div>
+         <div key={index} className='flex flex-col md:flex-row justify-between bg-primary/8 border boder-primary/20 rounded-lg mt-4 p-2 max-w-3xl'>
+          <div>
+
+          </div>
 
          </div>
         ))
       }
     </div>
-  ): <Loading/>
+  ) , <Loading/>
 }
 
 export default MyBookings
