@@ -27,7 +27,14 @@ const MyBookings = () => {
         bookings.map((item ,index)=>(
          <div key={index} className='flex flex-col md:flex-row justify-between bg-primary/8 border boder-primary/20 rounded-lg mt-4 p-2 max-w-3xl'>
           <div>
-
+           <p className="text-lg font-semibold">
+          {item.show?.movie?.title || 'Untitled Movie'}
+        </p>
+        <p>
+          {item.show?.movie?.runtime
+            ? `${Math.floor(item.show.movie.runtime / 60)}h ${item.show.movie.runtime % 60}m`
+            : 'Runtime not available'}
+        </p>
           </div>
 
          </div>
