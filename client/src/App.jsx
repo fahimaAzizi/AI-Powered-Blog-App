@@ -22,7 +22,7 @@ const App = () => {
         <Route path='/movies' element={<Movies />} />
         <Route path='/movies/:id' element={<MoviesDetails />} />
         <Route path='/movies/:id/:date' element={<SeatLayout/>} />
-        <Route path='/mybookings' element={<MyBookings />} />
+        <Route path='/MyBookings' element={<MyBookings />} />
         <Route path='/favorite' element={<Favorite />} />
       </Routes>
       {!isAdminRoute && <Footer />}
