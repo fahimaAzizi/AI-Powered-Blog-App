@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { dummyBookingData } from '../assets/assets';
-import Loading from '../components/Loading';
-import BlurCircle from '../components/BlurCircle';
+import React, { useEffect, useState } from "react";
+import Loading from "../components/Loading";
+import BlurCircle from "../components/BlurCircle";
+
+const dummyBookingData = [
+  {
+    show: {
+      movie: {
+        poster_path: "https://via.placeholder.com/150",
+        title: "Example Movie",
+        runtime: "2h 15m",
+      },
+      showDateTime: "2025-08-15 18:00",
+    },
+  },
+];
 
 const MyBookings = () => {
-  const currency = import.meta.env.VITE_CURRENCY; // fixed env var
+  const currency = "$"; // hardcoded for test
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +26,7 @@ const MyBookings = () => {
   };
 
   useEffect(() => {
-    getMyBookings(); // fixed function call
+    getMyBookings();
   }, []);
 
   return !isLoading ? (
@@ -33,17 +45,16 @@ const MyBookings = () => {
           <div className="flex flex-col md:flex-row">
             <img
               src={item.show.movie.poster_path}
-              alt={item.show.movie.name || 'Movie Poster'}
-              className="w-24 h-auto rounded-md"
+              alt={item.show.movie.title}
+              className="aspect-video h-auto object-cover object-bottom rounded-md"
             />
-          </div>
-          <div className="flex flex-col justify-center ml-4">
-            <h2 className="font-semibold">{item.show.movie.name}</h2>
-            <p>
-              {currency}
-              {item.price}
-            </p>
-            <p>{item.date}</p>
+            <div className="flex flex-col p-4">
+              <p className="text-lg font-semibold">{item.show.movie.title}</p>
+              <p className="text-gray-400 text-sm">{item.show.movie.runtime}</p>
+              <p className="text-gray-400 text-sm mt-auto">
+                {item.show.showDateTime}
+              </p>
+            </div>
           </div>
         </div>
       ))}
