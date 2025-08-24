@@ -8,8 +8,12 @@ import MyBookings from './pages/MyBookings'
 import SeatLayout from './pages/SeatLayout'
 import { Toaster } from 'react-hot-toast'
 import Footer from './components/Footer'
-import { Layout } from 'lucide-react'
-import AddShows from './pages/admin/AddShow'
+import { Layout, LayoutDashboard } from 'lucide-react'
+import AddShows from "./pages/admin/AddShows"; // if that's the correct name
+import Dashboard from './pages/admin/Dashboard'
+import ListShows from './pages/admin/ListShows'
+import ListBookings from './pages/admin/ListBookings'
+
 
 const App = () => {
   
@@ -27,7 +31,7 @@ const App = () => {
         <Route path='/MyBookings' element={<MyBookings />} />
         <Route path='/favorite' element={<Favorite />} />
         <Route path='/admin/*' element={<Layout/>}>
-          <Route path='' index element={<Dashboard/>}/>
+          <Route index element={<Dashboard/>}/>
           <Route path='add-shows' element={<AddShows/>}/>
           <Route path='list-shows' element={<ListShows/>}/>
           <Route path='list-bookings' element={<ListBookings/>}/>
