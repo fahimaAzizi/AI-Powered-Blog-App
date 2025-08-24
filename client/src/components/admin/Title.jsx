@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Title() {
+const Title =({text1 ,text2})=> {
   return (
-    <div>Title</div>
+    <div>
+      
+    </div>
   )
 }
 
