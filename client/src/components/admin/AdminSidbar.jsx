@@ -33,9 +33,14 @@ const AdminSidebar = ({ user }) => {
               ${isActive ? "bg-primary/15 text-primary font-semibold" : ""}`
             }
           >
-            <link.icon size={18} />
-            <span className="hidden md:inline">{link.name}</span>
+            {({isActive})=>(
+           <>
+            <link.icon className="w-5 h-5" />
+            <p className="max-md:hidden">{link.name}</p>
+            <span className={`w-.5 h-10 rounded-l right-0 absolute ${isActive&& 'bg-primary'}`}></span>
           </NavLink>
+          </>
+          )}
         ))}
       </div>
     </div>
