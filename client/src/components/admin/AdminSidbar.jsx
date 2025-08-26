@@ -1,13 +1,24 @@
 import React from "react";
+import {
+  LayoutDashboardIcon,
+  ListCollapseIcon,
+  ListIcon,
+  PlusSquareIcon,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
-import { Home, Film, Users, Settings } from "lucide-react";
 
-const AdminSidebar = ({ user }) => {
+const AdminSidebar = () => {
+  const user = {
+    firstName: "Admin",
+    lastName: "User",
+    imageUrl: "/assets/profile.png", // make sure you have this image in public/assets folder
+  };
+
   const adminNavLinks = [
-    { name: "Dashboard", path: "/admin", icon: Home },
-    { name: "Shows", path: "/admin/shows", icon: Film },
-    { name: "Users", path: "/admin/users", icon: Users },
-    { name: "Settings", path: "/admin/settings", icon: Settings },
+    { name: "Dashboard", path: "/admin", icon: LayoutDashboardIcon },
+    { name: "Add Shows", path: "/admin/add-shows", icon: PlusSquareIcon },
+    { name: "List Shows", path: "/admin/list-shows", icon: ListIcon },
+    { name: "List Bookings", path: "/admin/list-bookings", icon: ListCollapseIcon },
   ];
 
   return (
@@ -20,31 +31,6 @@ const AdminSidebar = ({ user }) => {
       />
       <p className="mt-2 text-base max-md:hidden">
         {user.firstName} {user.lastName}
-      </p>
-
-      {/* Navigation Links */}
-      <div className="w-full mt-6">
-        {adminNavLinks.map((link, index) => (
-          <NavLink
-            key={index}
-            to={link.path}
-            className={({ isActive }) =>
-              `relative flex items-center gap-2 w-full py-2.5 px-4 md:pl-10 text-gray-400 hover:text-primary transition 
-              ${isActive ? "bg-primary/15 text-primary font-semibold" : ""}`
-            }
-          >
-            {({isActive})=>(
-           <>
-            <link.icon className="w-5 h-5" />
-            <p className="max-md:hidden">{link.name}</p>
-            <span className={`w-.5 h-10 rounded-l right-0 absolute ${isActive&& 'bg-primary'}`}></span>
-          </NavLink>
-          </>
-          )}
-        ))}
-      </div>
-    </div>
-  );
-};
+      
 
 export default AdminSidebar;
