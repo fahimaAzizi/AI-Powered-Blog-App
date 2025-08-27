@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import BlurCircle from "../components/BlurCircle";
+import {dummyBookingData} from '../assets/assets'
 
 const dummyBookingData = [
   {
@@ -16,7 +17,8 @@ const dummyBookingData = [
 ];
 
 const MyBookings = () => {
-  const currency = "$"; // hardcoded for test
+  const currency = import.meta.env.VITE_CURRENCY
+
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
