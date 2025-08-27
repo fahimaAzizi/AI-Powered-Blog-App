@@ -12,8 +12,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+  ResponsiveContainer
+} from 'recharts';
+
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({
