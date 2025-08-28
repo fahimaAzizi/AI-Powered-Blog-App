@@ -47,7 +47,7 @@ const MyBookings = () => {
           <div className="flex flex-col md:flex-row">
             <img
               src={item.show.movie.poster_path}
-              alt={item.show.movie.title}
+              alt=''
               className="aspect-video h-auto object-cover object-bottom rounded-md"
             />
             <div className="flex flex-col p-4">
