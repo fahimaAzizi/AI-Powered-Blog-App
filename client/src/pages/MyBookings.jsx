@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import BlurCircle from "../components/BlurCircle";
-import {dummyBookingData} from '../assets/assets'
+import { dummyBookingData } from '../assets/assets';
+// ✅ Now use dummyBookingData directly
 
-const dummyBookingData = [
+
+const dummyBookingData= [
   {
     show: {
       movie: {
