@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import BlurCircle from "../components/BlurCircle";
-import { dummyBookingData } from '../assets/assets';
-// ✅ Now use dummyBookingData directly
-
-
-const dummyBookingData= [
-  {
-    show: {
-      movie: {
-        poster_path: "https://via.placeholder.com/150",
-        title: "Example Movie",
-        runtime: "2h 15m",
-      },
-      showDateTime: "2025-08-15 18:00",
-    },
-  },
-];
+import { dummyBookingData } from "../assets/assets";
 
 const MyBookings = () => {
-  const currency = import.meta.env.VITE_CURRENCY
+  const currency = import.meta.env.VITE_CURRENCY || "$"; // fallback if not set
 
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getMyBookings = async () => {
-    setBookings(dummyBookingData);
-    setIsLoading(false);
+    // simulate fetching
+    setTimeout(() => {
+      setBookings(dummyBookingData);
+      setIsLoading(false);
+    }, 500);
   };
 
   useEffect(() => {
@@ -49,8 +37,8 @@ const MyBookings = () => {
           <div className="flex flex-col md:flex-row">
             <img
               src={item.show.movie.poster_path}
-              alt=''
-              className="aspect-video h-auto object-cover object-bottom rounded-md"
+              alt={item.show.movie.title}
+              className="aspect-video h-auto w-40 object-cover rounded-md"
             />
             <div className="flex flex-col p-4">
               <p className="text-lg font-semibold">{item.show.movie.title}</p>
@@ -60,30 +48,30 @@ const MyBookings = () => {
               </p>
             </div>
           </div>
+
           <div className="flex flex-col md:items-end md:text-right justify-between p-4">
-  <div className="flex items-center gap-4">
-    <p className="text-2xl font-semibold mb-3">
-      {currency}{item.amount}
-    </p>
-    {!item.isPaid && (
-      <button
-        className="bg-primary px-4 py-1.5 mb-3 text-sm rounded-full font-medium cursor-pointer"
-      >
-        Pay Now
-      </button>
-    )}
-  </div>
+            <div className="flex items-center gap-4">
+              <p className="text-2xl font-semibold mb-3">
+                {currency}{item.amount}
+              </p>
+              {!item.isPaid && (
+                <button className="bg-primary px-4 py-1.5 mb-3 text-sm rounded-full font-medium cursor-pointer">
+                  Pay Now
+                </button>
+              )}
+            </div>
 
-  <div className="text-sm">
-    <p>
-      <span className="text-gray-400">Total Tickets:</span> {item.bookedSeats.length}
-    </p>
-    <p>
-      <span className="text-gray-400">Seat Number:</span> {item.bookedSeats.join(", ")}
-    </p>
-  </div>
-</div>
-
+            <div className="text-sm">
+              <p>
+                <span className="text-gray-400">Total Tickets:</span>{" "}
+                {item.bookedSeats.length}
+              </p>
+              <p>
+                <span className="text-gray-400">Seat Number:</span>{" "}
+                {item.bookedSeats.join(", ")}
+              </p>
+            </div>
+          </div>
         </div>
       ))}
     </div>
