@@ -5,6 +5,7 @@ import {
   PlayCircleIcon,
   UsersIcon,
 } from "lucide-react";
+import { dummyBookingData, dummyDashboardData } from "../../assets/assets";
 
 
 const Dashboard = () => {
@@ -40,7 +41,14 @@ const Dashboard = () => {
     },
   ];
 
-  
+  const fetchDashboarData = async() =>{
+    setDashboardData(dummyDashboardData)
+    setLoading(false)
+  };
+
+  useEffect(()=>{
+    fetchDashboarData();
+  } ,[])
 
 }
 
