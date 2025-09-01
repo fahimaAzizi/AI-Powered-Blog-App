@@ -6,6 +6,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { dummyBookingData, dummyDashboardData } from "../../assets/assets";
+import Loading from "../../components/Loading";
+import Title from "../../components/admin/Title";
 
 
 const Dashboard = () => {
@@ -49,6 +51,14 @@ const Dashboard = () => {
   useEffect(()=>{
     fetchDashboarData();
   } ,[])
+  return !loading ?(
+    <>
+      <Title text1="Admin" text2="Dashboerd"/>
+      <div>
+        
+      </div>
+    </>
+  ) : <Loading/>
 
 }
 
