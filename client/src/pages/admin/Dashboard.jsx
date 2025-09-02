@@ -5,7 +5,7 @@ import {
   PlayCircleIcon,
   UsersIcon,
 } from "lucide-react";
-import { dummyBookingData, dummyDashboardData } from "../../assets/assets";
+import { dummyDashboardData } from "../../assets/assets";
 import Loading from "../../components/Loading";
 import Title from "../../components/admin/Title";
 
