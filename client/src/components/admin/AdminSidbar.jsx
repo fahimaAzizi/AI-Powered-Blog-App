@@ -5,13 +5,15 @@ import {
   ListIcon,
   PlusSquareIcon,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { assets } from "../../assets/assets";
 
 
 const AdminSidebar = () => {
   const user = {
     firstName: "Admin",
     lastName: "User",
-    imageUrl: /assets/profile, // make sure you have this image in public/assets folder
+    imageUrl: assets.profile,
   };
 
   const adminNavLinks = [
@@ -36,14 +38,21 @@ return (
     </p>
 
     <div className="w-full">
-      {adminNavlinks.map((link, index) => (
+      {adminNavLinks.map((link, index) => (
         <NavLink
           key={index}
           className={({ isActive }) =>
             `relative flex items-center max-md:justify-center gap-2 w-full py-2.5 
              min-md:pl-10 first:mt-6 text-gray-400 ${
                isActive && "bg-primary/15 text-primary group" }` }>
-                {({isActive})=>}
+                {({isActive})=>(
+                  <>
+                  <link.icon  className="w-5 h-5"/>
+                  <p className="max-md:hidden">{link.name} </p>
+                  <span className={`w-1.5 h-10 rounded-l right-0 absolute ${isActive && 'bg-prinary'}`}/>
+
+                  </>
+                )}
             
          
         
