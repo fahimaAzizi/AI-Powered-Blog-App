@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowRightIcon, ClockIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
-
+import MyBookings from './MyBookings';
 import Loading from '../components/Loading';
 import BlurCircle from '../components/BlurCircle';
 import isoTimeFormat from '../lib/isoTimeFormat';
@@ -124,17 +124,19 @@ const SeatLayout = () => {
 
         {/* Proceed Button */}
         <button
-          onClick={() =>
-            selectedTime && selectedSeats.length
-              ? navigate(`/booking/${id}/${date}/${selectedTime.time}`, {
-                  state: {
-                    movie: show.movie,
-                    time: selectedTime,
-                    seats: selectedSeats,
-                  },
-                })
-              : toast.error('Please select time and seats')
-          }
+        onClick={() =>
+  selectedTime && selectedSeats.length
+    ? navigate('/MyBookings', {
+        state: {
+          movie: show.movie,
+          time: selectedTime,
+          seats: selectedSeats,
+        },
+      })
+    : toast.error('Please select time and seats')
+}
+
+          
           className="bg-primary text-white px-6 py-2 rounded mt-6 flex items-center gap-2"
         >
           Continue <ArrowRightIcon className="w-4 h-4" />

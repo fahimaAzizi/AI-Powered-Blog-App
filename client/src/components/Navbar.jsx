@@ -44,8 +44,8 @@ const  Navbar = () => {
           ) :(
             <UserButton>
               <UserButton.MenuItems>
-                <UserButton.Action label='MyBokkings' labelIcon={<TicketPlus width={15}/> 
-                }onClick={()=> navigate('/ MyBookings')}/>
+                <UserButton.Action label='MyBookings' labelIcon={<TicketPlus width={15}/> 
+                }onClick={()=> navigate('Mybookings')}/>
                   
               </UserButton.MenuItems>
             </UserButton>         

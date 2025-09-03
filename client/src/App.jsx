@@ -29,7 +29,7 @@ const App = () => {
         <Route path='/movies' element={<Movies />} />
         <Route path='/movies/:id' element={<MoviesDetails />} />
         <Route path='/movies/:id/:date' element={<SeatLayout/>} />
-        <Route path='/myBookings' element={<MyBookings/>} />
+        <Route path='/MyBookings' element={<MyBookings/>} />
         <Route path='/favorite' element={<Favorite />} />
         <Route path='/admin/*' element={<Layout/>}>
           <Route index element={<Dashboard/>}/>
