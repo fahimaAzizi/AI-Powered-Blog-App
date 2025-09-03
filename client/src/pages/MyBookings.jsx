@@ -6,7 +6,7 @@ import { dummyBookingData } from "../assets/assets";
 const MyBookings = () => {
   const currency = import.meta.env.VITE_CURRENCY || "$"; // fallback if not set
 
-  const [MyBookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getMyBookings = async () => {
@@ -29,7 +29,7 @@ const MyBookings = () => {
       </div>
       <h1 className="text-lg font-semibold mb-4">My Bookings</h1>
 
-      {MyBookings.map((item, index) => (
+      {bookings.map((item, index) => (
         <div
           key={index}
           className="flex flex-col md:flex-row justify-between bg-primary/8 border border-primary/20 rounded-lg mt-4 p-2 max-w-3xl"
