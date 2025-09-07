@@ -2,24 +2,20 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import Title from "../../components/admin/Title";
 import { currency } from "../../App"; 
-import dateFormat from "../../utils/dateFormat"; // ✅ make sure you have this util
+import dateFormat from "../../utils/dateFormat"; // make sure this file exists!
 
 const ListShows = () => {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchShows = async () => {
-    try {
-      // 👇 fetch shows from backend
-      const res = await fetch("/api/show/list");
-      const data = await res.json();
-      setShows(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching shows:", error);
-      setLoading(false);
-    }
-  };
+ const getAllShows =async ()=>{
+  try{
+
+    setShows([{
+      
+    }])
+  }
+ }
 
   useEffect(() => {
     fetchShows();
@@ -29,7 +25,7 @@ const ListShows = () => {
     <>
       <Title text1="All" text2="Shows" />
 
-      <div className="mt-6">
+      <div className="mt-6 overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-primary/20 text-sm">
@@ -41,27 +37,33 @@ const ListShows = () => {
           </thead>
 
           <tbody className="text-sm font-light">
-            {shows.map((show, index) => (
-              <tr
-                key={index}
-                className="border-b border-primary/10 odd:bg-primary/5 even:bg-primary/10"
-              >
-                {/* Movie Title */}
-                <td className="p-2 min-w-45 pl-5">{show.movie.title}</td>
+            {shows.map((show, index) => {
+              // ✅ Safe booking count (works if array or object)
+              const bookingCount = Array.isArray(show.occupiedSeats)
+                ? show.occupiedSeats.length
+                : Object.keys(show.occupiedSeats || {}).length;
 
-                {/* Show Date */}
-                <td className="p-2">{dateFormat(show.showDateTime)}</td>
+              return (
+                <tr
+                  key={index}
+                  className="border-b border-primary/10 odd:bg-primary/5 even:bg-primary/10"
+                >
+                  {/* Movie Title */}
+                  <td className="p-2 min-w-45 pl-5">{show.movie.title}</td>
 
-                {/* Total Bookings */}
-                <td className="p-2">{Object.keys(show.occupiedSeats).length}</td>
+                  {/* Show Date */}
+                  <td className="p-2">{dateFormat(show.showDateTime)}</td>
 
-                {/* Revenue */}
-                <td className="p-2">
-                  {currency}{" "}
-                  {Object.keys(show.occupiedSeats).length * show.showPrice}
-                </td>
-              </tr>
-            ))}
+                  {/* Total Bookings */}
+                  <td className="p-2">{bookingCount}</td>
+
+                  {/* Revenue */}
+                  <td className="p-2">
+                    {currency} {bookingCount * show.showPrice}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
