@@ -34,6 +34,19 @@ const ListShows = () => {
   return !loading ? (
     <>
     <Title text1= "List" text2="Shows"/>
+    <div className="msx-w-4xl mt-6 overflow-x-auto">
+      <table className="w-full border-collapse rounded-md overflow-hidden text-nowrap">
+        <thead>
+          <tr className="bg-primary/20 text-left text-white">
+            <th className="p-2 font-medium pi-5">Movie Name</th>
+            <th className="p-2 font-medium pi-5">Show Time</th>
+            <th className="p-2 font-medium pi-5">Total Bookings</th>
+            <th className="p-2 font-medium pi-5">Earnings</th>
+          </tr>
+
+        </thead>
+      </table>
+    </div>
     </>
   ) : (
     <Loading />
