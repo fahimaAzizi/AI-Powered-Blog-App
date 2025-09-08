@@ -2,7 +2,9 @@ import React from 'react'
 
 function AddShow() {
   return (
-    <div>AddShow</div>
+    <div>
+      
+    </div>
   )
 }
 
