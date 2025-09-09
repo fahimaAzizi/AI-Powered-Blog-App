@@ -1,4 +1,5 @@
 import React from 'react'
+import { dummyBookingData } from '../../assets/assets';
 
 
 
@@ -7,8 +8,11 @@ const ListBookings = () => {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
 
-}
-function ListBookings() {
+  const getAllBookings = async () =>{
+    setBookings(dummyBookingData)
+    setLoading(false);
+  }
+
   return (
     <div>
 
