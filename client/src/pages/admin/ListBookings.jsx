@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { dummyBookingData } from '../../assets/assets';
 
 
@@ -11,12 +11,16 @@ const ListBookings = () => {
   const getAllBookings = async () =>{
     setBookings(dummyBookingData)
     setLoading(false);
-  }
+  };
+   useEffect(()=>{
+    getAllBookings();
 
-  return (
-    <div>
+   }[]);
 
-    </div>
+  return !isLoading?(
+    <>
+
+    </>
   )
 }
 
