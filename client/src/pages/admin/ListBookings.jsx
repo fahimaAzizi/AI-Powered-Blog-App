@@ -20,6 +20,7 @@ const ListBookings = () => {
   return !isLoading?(
     <>
     <Title text1 ="list" text2="Bookings" />
+         
     </>
   ): <Loading/>
 }
