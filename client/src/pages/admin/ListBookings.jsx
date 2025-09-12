@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { dummyBookingData } from '../../assets/assets';
+import Loading from '../../components/Loading';
+import Title from '../../components/admin/Title';
+import { dateFormat } from '../../lib/dateFormat';
+
 
 
 
 const ListBookings = () => {
   const currency =import.meta.VITE_CURRENCY
-  const [shows, setShows] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [bookings, setBookings] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   const getAllBookings = async () =>{
     setBookings(dummyBookingData)
@@ -17,9 +21,9 @@ const ListBookings = () => {
 
    },[]);
 
-  return !isLoading?(
+  return ! isLoading ?(
     <>
-    <Title text1 ="list" text2="Bookings" />
+    <Title text1 ="List" text2="Bookings" />
     <div className='max-w-4xl mt-6 overflow-x-auto'>
       <table className='w-full border-collapse rounded-md overflow-hidden text-norap'>
          <thead>
