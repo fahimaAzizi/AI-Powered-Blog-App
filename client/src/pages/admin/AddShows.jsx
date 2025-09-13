@@ -1,4 +1,5 @@
 import React from 'react'
+import Title from '../../components/admin/Title';
 
 function AddShow() {
   return (
@@ -18,10 +19,10 @@ function AddShow() {
             >
               {/* Movie content goes here */}
               <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                className="rounded-lg shadow-md"
-              />
+                src={movie.poster_path} className='w-full'/>
+               
+               
+              
               <p className="mt-2 text-sm text-center">{movie.title}</p>
             </div>
           ))}
