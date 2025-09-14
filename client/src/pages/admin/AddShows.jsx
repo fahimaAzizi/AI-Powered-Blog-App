@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Loading from '../../components/Loading';
 
 
 
@@ -27,7 +28,7 @@ const AddShows =()=>{
       </div>
     </div>
     </>
-  )
+  ): <Loading/>
 }
 
 export default AddShows
