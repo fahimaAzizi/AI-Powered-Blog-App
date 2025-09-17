@@ -33,7 +33,9 @@ const AddShows = () =>{
            <div className='relative rounded-lg overflow-hidden'>
             <img src={movie.poster-path} className='w-full object-cover brightness-90' alt="" />
             <div className='text-sm flex item-center'>
+          <p className='flex item-center gap-1'>
 
+          </p>
             </div>
             </div> 
          </div>
