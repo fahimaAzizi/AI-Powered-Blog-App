@@ -45,6 +45,15 @@ const AddShows = () =>{
           </p>
             </div>
             </div> 
+            {selectedMovies === movie.id && (
+          <div className="absolute top-2 right-2 flex items-center justify-center bg-primary h-6 w-6 rounded">
+            <CheckIcon className="w-4 h-4 text-white" strokeWidth={2.5} />
+             </div>
+             )}
+
+                 <p className="font-medium truncate">{movie.title}</p>
+                 <p className="text-gray-400 text-sm">{movie.release_date}</p>
+
          </div>
       ))}
       </div>
