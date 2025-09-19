@@ -29,7 +29,8 @@ const AddShows = () =>{
     <div className='overflow-x-auto pb-4'>
       <div className='group flex flrx-wrap gap-4 mt-4 w-max'>
         {nowPlayingMovies.map((movie)=>(
-         <div key={movie.id} className={`relative max-w-40 cursor-point group-hover:not-hover:opacity-40 hover:-translate-y-1transition duration-300`}>
+         <div key={movie.id} className={`relative max-w-40 cursor-point group-hover:not-hover:opacity-40 hover:-translate-y-1transition duration-300`}
+         onClick={()=>setSelectedMovies(movie._id)}>
 
            <div className='relative rounded-lg overflow-hidden'>
             <img src={movie.poster_path} className='w-full object-cover brightness-90' alt="" />
