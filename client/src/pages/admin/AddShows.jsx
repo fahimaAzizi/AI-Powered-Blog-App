@@ -18,6 +18,24 @@ const AddShows = () =>{
   const fetchNowplayingMovies =async ()=>{
     setNowPlayingMovies(dummyShowsData)
   };
+  const handleDateTimeAdd =()=>{
+    if(!dateTimeInput) return;
+    const[date ,time] =dateTimeInput.split("T");
+    if (!date || !time) return;
+    setDateTimeSelection((prev)=>{
+      const times =prev[date] || [];
+    if(!times.includes(time)){
+      return {...prev,[date] : [...AddShows.times ,time]};
+    }
+    return prev;
+    });
+  }
+
+
+
+
+
+
   useEffect(() =>{
     fetchNowplayingMovies();
   },[]);
