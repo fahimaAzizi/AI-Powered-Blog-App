@@ -20,6 +20,8 @@ const AddShows = () =>{
   };
   const handleDateTimeAdd =()=>{
     if(!dateTimeInput) return;
+
+
     const[date ,time] =dateTimeInput.split("T");
     if (!date || !time) return;
     setDateTimeSelection((prev)=>{
@@ -29,12 +31,21 @@ const AddShows = () =>{
     }
     return prev;
     });
-  }
+  };
 
-
-
-
-
+  const handleRemoveTime =(date ,time) =>{
+    setDateTimeSelection((prev) => {
+      const filteredTimes = prev[date].filter((t) => t !== time);
+      if  (filteredTimes.length ===0){
+        const { [date] : _, ...rest } =prev ;
+        return rest;
+      }
+      return{
+      ...prev,
+      [date]: filteredTimes,
+    }
+    });
+  };
 
   useEffect(() =>{
     fetchNowplayingMovies();
