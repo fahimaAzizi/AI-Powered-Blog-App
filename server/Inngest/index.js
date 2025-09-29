@@ -16,6 +16,18 @@ const syncUserCreation = inngest.createFunction(
       name: `${first_name} ${last_name}`,
       image: image_url || "",
     };
+    // Webhook listener for deleting user
+const syncUserDeletion = {
+  id: 'delete-user-with-clerk',
+  event: 'clerk/user.deleted',
+  async (event) => {
+    const { id } = event.data;
+    await User.findByIdAndDelete(id);
+  }
+};
+
+
+
 
     // TODO: Save userData to your database
     console.log("User Data Synced:", userData);
