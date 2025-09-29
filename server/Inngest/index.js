@@ -26,7 +26,15 @@ const syncUserDeletion = {
   }
 };
 
-
+// Ingest Function to delete user from database
+const syncUserDeletionFn = ingest.createFunction(
+  { id: 'delete-user-with-clerk' },
+  { event: 'clerk/user.deleted' },
+  async (event) => {
+    const { id } = event.data;
+    await User.findByIdAndDelete(id);
+  }
+);
 
 
     // TODO: Save userData to your database
