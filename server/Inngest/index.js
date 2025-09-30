@@ -1,10 +1,11 @@
 import { Inngest } from "inngest";
+// import User from "../models/User"; // <- Uncomment and adjust path to your User model
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
 // Inngest Function to save user data to a database
-const syncUserCreation = inngest.createFunction(
+export const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
   { event: "clerk/user.created" },
   async ({ event }) => {
@@ -16,30 +17,28 @@ const syncUserCreation = inngest.createFunction(
       name: `${first_name} ${last_name}`,
       image: image_url || "",
     };
-    // Webhook listener for deleting user
-const syncUserDeletion = {
-  id: 'delete-user-with-clerk',
-  event: 'clerk/user.deleted',
-  async (event) => {
-    const { id } = event.data;
-    await User.findByIdAndDelete(id);
-  }
-};
-
-// Ingest Function to delete user from database
-const syncUserDeletionFn = ingest.createFunction(
-  { id: 'delete-user-with-clerk' },
-  { event: 'clerk/user.deleted' },
-  async (event) => {
-    const { id } = event.data;
-    await User.findByIdAndDelete(id);
-  }
-);
-
 
     // TODO: Save userData to your database
+    // await User.create(userData);
+
     console.log("User Data Synced:", userData);
 
     return { success: true, userData };
+  }
+);
+
+// Inngest Function to delete user from database
+export const syncUserDeletion = inngest.createFunction(
+  { id: "delete-user-with-clerk" },
+  { event: "clerk/user.deleted" },
+  async ({ event }) => {
+    const { id } = event.data;
+
+    // TODO: Delete user from your database
+    // await User.findByIdAndDelete(id);
+
+    console.log(`User with ID ${id} deleted from database`);
+
+    return { success: true, deletedId: id };
   }
 );
