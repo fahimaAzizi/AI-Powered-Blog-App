@@ -41,8 +41,8 @@ const syncUserUpdation = inngest.createFunction(
   { id: "delete-user-with-clerk" },
   { event: "clerk/user.deleted" },
   async ({ event }) => {
-    const { id } = event.data;
-    await User.findByIdAndDelete(id)
+    const { id, first_name, last_name, email_addresses, image_url } = event.data;
+    
 
   }
 );
