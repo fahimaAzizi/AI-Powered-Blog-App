@@ -28,17 +28,21 @@ export const syncUserCreation = inngest.createFunction(
 );
 
 // Inngest Function to delete user from database
-export const syncUserDeletion = inngest.createFunction(
+const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-with-clerk" },
   { event: "clerk/user.deleted" },
   async ({ event }) => {
     const { id } = event.data;
+    await User.findByIdAndDelete(id)
 
-    // TODO: Delete user from your database
-    // await User.findByIdAndDelete(id);
+  }
+);
+const syncUserUpdation = inngest.createFunction(
+  { id: "delete-user-with-clerk" },
+  { event: "clerk/user.deleted" },
+  async ({ event }) => {
+    const { id } = event.data;
+    await User.findByIdAndDelete(id)
 
-    console.log(`User with ID ${id} deleted from database`);
-
-    return { success: true, deletedId: id };
   }
 );
