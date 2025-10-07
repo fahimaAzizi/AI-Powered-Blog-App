@@ -1,11 +1,11 @@
 import { Inngest } from "inngest";
-import User from "../models/user.js"
+import User from "../models/User.js";
 
-// Create a client to send and receive events
+// Create Inngest client
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
-// Inngest Function to save user data to a database
-export const syncUserCreation = inngest.createFunction(
+// Function: Sync new Clerk user
+const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
   { event: "clerk/user.created" },
   async ({ event }) => {
@@ -18,36 +18,40 @@ export const syncUserCreation = inngest.createFunction(
       image: image_url || "",
     };
 
-    // TODO: Save userData to your database
+    console.log("✅ User Synced:", userData);
     // await User.create(userData);
-
-    console.log("User Data Synced:", userData);
-
     return { success: true, userData };
   }
 );
 
-// Inngest Function to delete user from database
+// Function: Delete user
 const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-with-clerk" },
   { event: "clerk/user.deleted" },
   async ({ event }) => {
     const { id } = event.data;
-    await User.findByIdAndDelete(id)
-
+    console.log("🗑️ Deleting user:", id);
+    // await User.findByIdAndDelete(id);
   }
 );
+
+// Function: Update user
 const syncUserUpdation = inngest.createFunction(
-  { id: "delete-user-with-clerk" },
-  { event: "clerk/user.deleted" },
+  { id: "update-user-with-clerk" },
+  { event: "clerk/user.updated" },
   async ({ event }) => {
     const { id, first_name, last_name, email_addresses, image_url } = event.data;
-    const userData ={
+    const userData = {
       _id: id,
-      email: email_addresses[0].email_address,
-      name:first_name+' '+last_name,
-      image:image_url
-    }
-     await User.create(userData)
+      email: email_addresses[0]?.email_address || "",
+      name: `${first_name} ${last_name}`,
+      image: image_url || "",
+    };
+
+    console.log("🔄 Updating user:", userData);
+    // await User.findByIdAndUpdate(id, userData);
   }
 );
+
+// Export all functions for Inngest Express middleware
+export const functions = [syncUserCreation, syncUserDeletion, syncUserUpdation];
