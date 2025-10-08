@@ -19,3 +19,11 @@ export const getNowPlayingMovies = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+ export const addShow = async (req, res) =>{
+  try{
+
+  }catch(error){
+    console.error(error);
+    res.json({success:false,message: error.message})
+  }
+ }
