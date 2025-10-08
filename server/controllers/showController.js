@@ -26,7 +26,12 @@ export const getNowPlayingMovies = async (req, res) => {
       let movie = await Movie.findById(movieId)
 
       if (!movie){
+         const[movieDetailsResponse ,movieCareditsResponse] =await Promise.all([
+          axios.get(`https://api.themoviedb.org/3/movie/${movieId}`,{
+            headers: {Authorization: `Bearer ${process.env.TMDB_API_KEY}`}}),
         
+
+         ])
       }
       
   }catch(error){
