@@ -21,7 +21,14 @@ export const getNowPlayingMovies = async (req, res) => {
 };
  export const addShow = async (req, res) =>{
   try{
+      const {movieId, showsInput ,showPrice} =req.body
 
+      let movie = await Movie.findById(movieId)
+
+      if (!movie){
+        
+      }
+      
   }catch(error){
     console.error(error);
     res.json({success:false,message: error.message})
