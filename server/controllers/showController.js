@@ -36,6 +36,24 @@ export const getNowPlayingMovies = async (req, res) => {
             })
           
          ])
+         const movieApiData = movieDetailsResponse.data;
+         const movieCareditsData = movieCareditsResponse.data;
+          const movieDetail ={
+            
+        _id : movieId,
+        title: movieApiData.title,
+        overview:movieApiData. overview,
+        poster_path :movieApiData.poster_path,
+        backdrop_path:movieApiData.backdrop_path ,
+        release_date :movieApiData.release_date,
+        original_language:movieApiData.original_languag,
+        genres:movieApiData.genres,
+        casts:movieApiData.casts,
+        tagline:movieApiData.tagline||"",
+        vote_average:movieApiData.vote_average,
+        runtime:movieApiData.runtime,
+
+          }
       }
       
   }catch(error){
