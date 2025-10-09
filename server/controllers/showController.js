@@ -1,4 +1,5 @@
 import axios from "axios";
+import Movie from "../models/Movie.js"
 
 export const getNowPlayingMovies = async (req, res) => {
   try {
@@ -29,8 +30,11 @@ export const getNowPlayingMovies = async (req, res) => {
          const[movieDetailsResponse ,movieCareditsResponse] =await Promise.all([
           axios.get(`https://api.themoviedb.org/3/movie/${movieId}`,{
             headers: {Authorization: `Bearer ${process.env.TMDB_API_KEY}`}}),
-        
-
+            
+            axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`,{
+              headers: {Authorization: `Bearer ${process.env.TMDB_API_KEY}`}
+            })
+          
          ])
       }
       
