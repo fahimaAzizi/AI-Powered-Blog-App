@@ -56,6 +56,14 @@ export const getNowPlayingMovies = async (req, res) => {
           }
           movie = await Movie.create(movieDetails),
       }
+
+      const showToCreate =[];
+      showsInput,.forEach(show =>{
+         const showDate = show.date;
+         show.time.forEach((time)=>{
+          const
+         })
+      )}
       
   }catch(error){
     console.error(error);
