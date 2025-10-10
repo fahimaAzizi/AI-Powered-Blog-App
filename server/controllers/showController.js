@@ -54,6 +54,7 @@ export const getNowPlayingMovies = async (req, res) => {
         runtime:movieApiData.runtime,
 
           }
+          movie = await Movie.create(movieDetails),
       }
       
   }catch(error){
