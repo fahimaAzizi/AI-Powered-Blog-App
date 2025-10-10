@@ -54,16 +54,25 @@ export const getNowPlayingMovies = async (req, res) => {
         runtime:movieApiData.runtime,
 
           }
-          movie = await Movie.create(movieDetails),
+          movie = await Movie.create(movieDetails);
       }
+      
 
-      const showToCreate =[];
-      showsInput,.forEach(show =>{
-         const showDate = show.date;
-         show.time.forEach((time)=>{
-          const
-         })
-      )}
+const showsToCreate = [];
+
+showsInput.forEach((show) => {
+  const showDate = show.date;
+  show.time.forEach((time) => {
+    const dateTimeString = `${showDate}T${time}`;
+    showsToCreate.push({
+      movie: movieId,
+      showDateTime: new Date(dateTimeString),
+      showPrice,
+      occupiedSeats: {},
+    });
+  });
+});
+
       
   }catch(error){
     console.error(error);
