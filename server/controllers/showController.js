@@ -72,8 +72,11 @@ showsInput.forEach((show) => {
     });
   });
 });
-
-      
+  
+  if(showsToCreate.length >0){
+    await Show.insertMany(showsToCreate);
+  }
+      res.json({success: true, message:' Show Added successfully.'})
   }catch(error){
     console.error(error);
     res.json({success:false,message: error.message})
