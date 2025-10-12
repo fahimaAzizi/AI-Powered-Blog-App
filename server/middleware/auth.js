@@ -1,5 +1,4 @@
-import {clerkCilient} from '@clerk/express'
-
+import { clerkClient } from "@clerk/express";
 
 export const protectAdmin = async (req, res, next) => {
   try {
@@ -11,3 +10,10 @@ export const protectAdmin = async (req, res, next) => {
     if (user.privateMetadata.role !== "admin") {
       return res.status(403).json({ message: "Access denied! Admins only." });
     }
+
+    next(); // Continue if user is admin
+  } catch (error) {
+    console.error(error);
+    res.status(401).json({ message: "Unauthorized access!" });
+  }
+};
