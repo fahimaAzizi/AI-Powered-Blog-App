@@ -84,5 +84,10 @@ showsInput.forEach((show) => {
  }
 
  export const getShow = async(req, ees)=>{
-  
+  try {
+    const shows = await Show.find({showDateTime:{$gte:new Date()}}).populate
+    ('movie').sort({showDateTime: 1});
+  }catch (error){
+    
+  }
  }
