@@ -82,3 +82,7 @@ showsInput.forEach((show) => {
     res.json({success:false,message: error.message})
   }
  }
+
+ export const getShow = async(req, ees)=>{
+  
+ }
