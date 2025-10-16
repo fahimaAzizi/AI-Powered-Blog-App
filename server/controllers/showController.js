@@ -1,6 +1,6 @@
 import axios from "axios";
 import Movie from "../models/Movie.js"
-
+import Show from ''
 export const getNowPlayingMovies = async (req, res) => {
   try {
     // Fetch now playing movies from TMDB API
@@ -83,12 +83,25 @@ showsInput.forEach((show) => {
   }
  }
 
- export const getShow = async(req, ees)=>{
+ export const getShows = async(req, ees)=>{
   try {
     const shows = await Show.find({showDateTime:{$gte:new Date()}}).populate
     ('movie').sort({showDateTime: 1});
   }catch (error){
     console.error(error);
-    res.json({success: false , message: ErrorEvent.message})
+    res.json({success: false , message: ErrorEvent.message});
+  }
+ }
+
+ export const getShow = async(req, ees)=>{
+  try {
+      const {movieId} = erq.params;
+
+      const shows = await Show.find({movie: movieId,showDateTime:{$gte: new Date() }})
+      const movie =await Movie.findById(movieId);
+      const dateTime ={};
+
+  } catch (error){
+    
   }
  }
