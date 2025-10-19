@@ -16,7 +16,7 @@ const checkSeatsAvailability =async (showId,selectedSeats)=>{
   
 }
 
-export const createBooking = ascy(req,res)=>{
+export const createBooking = async (req,res) =>{
    try {
       const {userId} = req.auth();
       const {showId, selectedSeats}= req.body;
@@ -26,7 +26,7 @@ export const createBooking = ascy(req,res)=>{
       const isAvailabe = await checkSeatsAvailability(showId,selectedSeats)
 
       if(!isAvailabe){
-         
+         returnres.json({success: false, message:"selected Seats are not available."})
       }
    } catch(error){
 
