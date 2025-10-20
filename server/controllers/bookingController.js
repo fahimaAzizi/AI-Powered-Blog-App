@@ -35,8 +35,14 @@ export const createBooking = async (req,res) =>{
       const booking = await Booking.create({
           user : userId,
           show: showId,
-          amount :showData.showPrice * selectedSeats       
+          amount :showData.showPrice * selectedSeats.length,
+          bookedSeats: selectedSeats       
       })
+       selectedSeats.map((seat)=>{
+         showData.occupiedSeats[seat] =userId;
+       })
+       showData.markModified('occupiedSeat')
+
    } catch(error){
 
    }
