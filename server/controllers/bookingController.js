@@ -33,7 +33,9 @@ export const createBooking = async (req,res) =>{
       const showData = await showId.findById(showId).populate('movie');
 
       const booking = await Booking.create({
-         
+          user : userId,
+          show: showId,
+          amount :showData.showPrice * selectedSeats       
       })
    } catch(error){
 
