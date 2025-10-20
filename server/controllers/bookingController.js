@@ -43,7 +43,12 @@ export const createBooking = async (req,res) =>{
        })
        showData.markModified('occupiedSeat')
 
-   } catch(error){
+       await showData.save();
 
+       res.json({success: true, message:'booked successfully'})
+
+   } catch(error){
+    console.log(error.message);
+    res.json({success:false, message: error.message})
    }
 }
