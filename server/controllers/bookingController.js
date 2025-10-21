@@ -28,6 +28,13 @@ export const createBooking = async (req,res) =>{
       if(!isAvailabe){
          returnres.json({success: false, message:"selected Seats are not available."})
       }
+
+
+      const showData = await showId.findById(showId).populate('movie');
+
+      const booking = await Booking.create({
+         
+      })
    } catch(error){
 
    }
