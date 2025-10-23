@@ -1,6 +1,6 @@
 import Booking from"../models/Booking.js"
 import Show from "../models/Show.js"
-
+import User from "../models/user.js"
 
 export const isAdmin = async (req,res)=>{
     res.json({success: true, isAdmin: true})
@@ -40,3 +40,4 @@ export const getDashboardData = async (req, res) => {
     res.json({ success: false, message: 'Error fetching dashboard data' });
   }
 };
+ 
