@@ -41,3 +41,11 @@ export const getDashboardData = async (req, res) => {
   }
 };
  
+export const getAllShows = async (req,res)=>{
+    try{
+        const show = await Show.find({showDateTime:{$gte:new Date()}})
+    } catch (error) {
+       console.error(error);
+       res.json({success : flase , message: error.message})
+    }
+}
