@@ -43,7 +43,9 @@ export const getDashboardData = async (req, res) => {
  
 export const getAllShows = async (req,res)=>{
     try{
-        const show = await Show.find({showDateTime:{$gte:new Date()}})
+        const show = await Show.find({showDateTime:{$gte:new Date()}}).populate
+        ('movie').sort({showDateTime:1})
+        res.json({success:true, show})
     } catch (error) {
        console.error(error);
        res.json({success : flase , message: error.message})
