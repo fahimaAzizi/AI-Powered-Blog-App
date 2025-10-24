@@ -51,3 +51,12 @@ export const getAllShows = async (req,res)=>{
        res.json({success : flase , message: error.message})
     }
 }
+
+export const getAllBooking = async (req,res)=>{
+   try{
+
+   }catch (error){
+     console.error(error);
+    res.json({success : flase , message: error.message})
+   }
+}
