@@ -54,6 +54,7 @@ export const getAllShows = async (req,res)=>{
 
 export const getAllBooking = async (req,res)=>{
    try{
+    const bookings = await Booking.find({})
 
    }catch (error){
      console.error(error);
