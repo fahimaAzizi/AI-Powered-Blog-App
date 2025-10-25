@@ -54,7 +54,11 @@ export const getAllShows = async (req,res)=>{
 
 export const getAllBooking = async (req,res)=>{
    try{
-    const bookings = await Booking.find({})
+    const bookings = await Booking.find({}).populate('user').populate({
+      path: " show",
+      populate: {path: "movie"}
+    }).sort({createdAt: -1})
+    res.
 
    }catch (error){
      console.error(error);
