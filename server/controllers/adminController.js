@@ -58,7 +58,7 @@ export const getAllBooking = async (req,res)=>{
       path: " show",
       populate: {path: "movie"}
     }).sort({createdAt: -1})
-    res.
+    res.json({success :true , bookings})
 
    }catch (error){
      console.error(error);
