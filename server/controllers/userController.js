@@ -30,5 +30,20 @@ export const addFavoriteMovie = async (req, res) => {
       user.privateMetadata.favorites = [];
     }
 
-  
+    // Check if the movie already exists in favorites
+    if (!user.privateMetadata.favorites.includes(movieId)) {
+      user.privateMetadata.favorites.push(movieId);
+    }
+
+    // Update user metadata in Clerk
+    await clerkClient.users.updateUserMetadata(userId, {
+      privateMetadata: user.privateMetadata,
+    });
+
+    res.json({ success: true, message: "Movie added to favorites successfully" });
+
+  } catch (error) {
+    console.error(error.message);
+    res.json({ success: false, message: error.message });
+  }
 };
