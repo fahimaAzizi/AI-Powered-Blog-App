@@ -16,3 +16,19 @@ export const getUserBookings = async (req, res)=>{
         res.json({success : false , message: error.message})
    }
 }
+
+export const addFavoriteMovie = async (req, res) => {
+  try {
+    const { movieId } = req.body;
+    const userId = req.auth.userId;
+
+    // Get user data from Clerk
+    const user = await clerkClient.users.getUser(userId);
+
+    // Initialize favorites array if not present
+    if (!user.privateMetadata.favorites) {
+      user.privateMetadata.favorites = [];
+    }
+
+  
+};
