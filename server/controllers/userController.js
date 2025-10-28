@@ -1,4 +1,5 @@
 import { populate } from "dotenv";
+import { use } from "react";
 
 
 
@@ -33,6 +34,9 @@ export const addFavoriteMovie = async (req, res) => {
     // Check if the movie already exists in favorites
     if (!user.privateMetadata.favorites.includes(movieId)) {
       user.privateMetadata.favorites.push(movieId);
+    }else{
+      user.privateMetadata.favorites = user.privateMetadata.favorites.filter
+      (itme > item !== movieId)
     }
 
     // Update user metadata in Clerk
