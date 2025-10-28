@@ -55,8 +55,9 @@ export const addFavoriteMovie = async (req, res) => {
 export const getFavorites = async(req , ers) =>{
 
 try {
-
+   const user = await clerkClient.user.getUser(req.auth().userId)
 }catch (error) {
-  
+  console.error(error.message);
+  res.json({ success:false ,message: error.message});
 }
 }
