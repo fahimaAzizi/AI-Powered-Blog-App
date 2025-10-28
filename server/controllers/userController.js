@@ -51,3 +51,12 @@ export const addFavoriteMovie = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+export const getFavorites = async(req , ers) =>{
+
+try {
+
+}catch (error) {
+  
+}
+}
