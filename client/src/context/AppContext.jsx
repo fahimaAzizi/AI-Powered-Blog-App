@@ -1,8 +1,24 @@
-import axios from "axios";
+import { useContext } from "react"
+import { useState } from "react"
+import { Children } from "react"
+import { createContext } from "react"
+import axios from 'axios';
+ import axios from "axios";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast"; // optional, for error messages
 
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
+
+
+export const AppContext = createContext()
+
+export const AppProvider = ({Children})=>{
+
+    const [isAdmin, setIsAdmin] = useState(false)
+    const [shows, setShows] = useState([])
+    const [favoriteMovies, setFavoriteMovies] = useState([])
+   
 const fetchIsAdmin = async () => {
   try {
     // Make a GET request to your backend route
@@ -28,3 +44,13 @@ const fetchIsAdmin = async () => {
 useEffect(() => {
   fetchIsAdmin();
 }, []);
+
+    const value ={axios}
+    return(
+        <AppContext.Provider value ={value}>
+            {Children}
+        </AppContext.Provider>
+    )
+}
+
+export const useAppContext =() => useContext(AppContext)
