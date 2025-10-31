@@ -40,10 +40,20 @@ const fetchIsAdmin = async () => {
     console.error(error);
   }
 };
+const fetchShows = async ()=>{
+    try{
+
+    } catch (error){
+        
+    }
+}
 
 useEffect(() => {
-  fetchIsAdmin();
-}, []);
+     if(user){
+      fetchIsAdmin();   
+     }
+ 
+}, [user]);
 
     const value ={axios}
     return(
