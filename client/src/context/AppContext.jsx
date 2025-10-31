@@ -42,11 +42,20 @@ const fetchIsAdmin = async () => {
 };
 const fetchShows = async ()=>{
     try{
+        const {data} = await axios.get('/api/show/all')
+        if(data.success){
+            setShows(data.shows)
+        }else{
+            toast.error(data.message)
+        }
 
     } catch (error){
-        
+
     }
 }
+useInsertionEffect(()=>{
+    fetchShows()
+},[])
 
 useEffect(() => {
      if(user){
