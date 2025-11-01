@@ -71,7 +71,8 @@ useInsertionEffect(()=>{
 
 useEffect(() => {
      if(user){
-      fetchIsAdmin();   
+      fetchIsAdmin()
+      fetchFavoriteMovies()  
      }
  
 }, [user]);
