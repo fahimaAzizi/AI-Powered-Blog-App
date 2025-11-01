@@ -53,6 +53,18 @@ const fetchShows = async ()=>{
 
     }
 }
+const fetchFavoriteMovies = async()=>{
+  try{
+    const {data} = await axios.get('/api/user/favorites',{headers:{Authorization: `Bearer${await getToken()}`}})
+    if(data.success){
+      setFavoriteMovies(data.movies)
+    }else{
+
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
 useInsertionEffect(()=>{
     fetchShows()
 },[])
