@@ -1,9 +1,9 @@
 import { useContext } from "react"
 import { useState } from "react"
-import { Children } from "react"
 import { createContext } from "react"
+import { AppContext } from './context/AppContext';
 import axios from 'axios';
- import axios from "axios";
+import axios from "axios";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast"; // optional, for error messages
 
@@ -77,7 +77,12 @@ useEffect(() => {
  
 }, [user]);
 
-    const value ={axios}
+    const value = {
+      axios,
+      fetchIsAdmin,
+      user,getToken , navigate,isAdmin,shows,
+      favoriteMovies, fetchFavoriteMovies
+    }
     return(
         <AppContext.Provider value ={value}>
             {Children}
