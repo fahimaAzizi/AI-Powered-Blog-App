@@ -1,93 +1,85 @@
-import { useContext } from "react"
-import { useState } from "react"
-import { createContext } from "react"
-import { AppContext } from './context/AppContext';
-import axios from 'axios';
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect } from "react";
-import { toast } from "react-hot-toast"; // optional, for error messages
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom"; // make sure you have this
 
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
+export const AppContext = createContext();
 
+export const AppProvider = ({ children }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [shows, setShows] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
 
-export const AppContext = createContext()
+  const navigate = useNavigate();
 
-export const AppProvider = ({Children})=>{
+  // ✅ define or import user and getToken
+  const user = null; // replace with your actual user object
+  const getToken = async () => "your_token_here"; // replace with real logic
 
-    const [isAdmin, setIsAdmin] = useState(false)
-    const [shows, setShows] = useState([])
-    const [favoriteMovies, setFavoriteMovies] = useState([])
-   
-const fetchIsAdmin = async () => {
-  try {
-    // Make a GET request to your backend route
-    const { data } = await axios.get("/api/admin/is-admin", {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`, // getToken() returns user's auth token
-      },
-    });
+  const fetchIsAdmin = async () => {
+    try {
+      const { data } = await axios.get("/api/admin/is-admin", {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
 
-    // Set admin state (if using context)
-    setIsAdmin(data.isAdmin);
+      setIsAdmin(data.isAdmin);
 
-    // If the user is NOT admin and is trying to access admin routes
-    if (!data.isAdmin && location.pathname.startsWith("/admin")) {
-      navigate("/");
-      toast.error("You are not authorized to access admin dashboard");
+      if (!data.isAdmin && location.pathname.startsWith("/admin")) {
+        navigate("/");
+        toast.error("You are not authorized to access admin dashboard");
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
+  };
+
+  const fetchShows = async () => {
+    try {
+      const { data } = await axios.get("/api/show/all");
+      if (data.success) setShows(data.shows);
+      else toast.error(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchFavoriteMovies = async () => {
+    try {
+      const { data } = await axios.get("/api/user/favorites", {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
+      if (data.success) setFavoriteMovies(data.movies);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchShows();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchIsAdmin();
+      fetchFavoriteMovies();
+    }
+  }, [user]);
+
+  const value = {
+    axios,
+    fetchIsAdmin,
+    user,
+    getToken,
+    navigate,
+    isAdmin,
+    shows,
+    favoriteMovies,
+    fetchFavoriteMovies,
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
-const fetchShows = async ()=>{
-    try{
-        const {data} = await axios.get('/api/show/all')
-        if(data.success){
-            setShows(data.shows)
-        }else{
-            toast.error(data.message)
-        }
 
-    } catch (error){
-
-    }
-}
-const fetchFavoriteMovies = async()=>{
-  try{
-    const {data} = await axios.get('/api/user/favorites',{headers:{Authorization: `Bearer${await getToken()}`}})
-    if(data.success){
-      setFavoriteMovies(data.movies)
-    }else{
-
-    }
-  } catch (error) {
-    console.error(error)
-  }
-}
-useInsertionEffect(()=>{
-    fetchShows()
-},[])
-
-useEffect(() => {
-     if(user){
-      fetchIsAdmin()
-      fetchFavoriteMovies()  
-     }
- 
-}, [user]);
-
-    const value = {
-      axios,
-      fetchIsAdmin,
-      user,getToken , navigate,isAdmin,shows,
-      favoriteMovies, fetchFavoriteMovies
-    }
-    return(
-        <AppContext.Provider value ={value}>
-            {Children}
-        </AppContext.Provider>
-    )
-}
-
-export const useAppContext =() => useContext(AppContext)
+export const useAppContext = () => useContext(AppContext);
