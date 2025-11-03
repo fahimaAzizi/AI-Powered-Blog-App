@@ -3,9 +3,12 @@ import Loading from '../../components/Loading';
 import { dummyShowsData } from '../../assets/assets';
 import { kConverter } from '../../lib/kConverter';
 import {StarIcon} from 'lucide-react'
+import { useAppContext } from '../../context/AppContext';
 
 
 const AddShows = () =>{
+const {axios , getToken, user} = useAppContext()
+
  const currency = import.meta.env.VITE_CURRENCY;
 
 
@@ -16,7 +19,7 @@ const AddShows = () =>{
   const [showPrice, setShowPrice] = useState("");
 
   const fetchNowplayingMovies =async ()=>{
-    setNowPlayingMovies(dummyShowsData)
+    
   };
   const handleDateTimeAdd =()=>{
     if(!dateTimeInput) return;
