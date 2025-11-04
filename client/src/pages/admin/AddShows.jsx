@@ -19,7 +19,16 @@ const {axios , getToken, user} = useAppContext()
   const [showPrice, setShowPrice] = useState("");
 
   const fetchNowplayingMovies =async ()=>{
-    
+    try{
+      const { data} = await axios.get('/api/show/now-playing',{
+        headers : {Authorization `Bearer ${await  getToken()}`}})
+        if (data.success){
+          setNowPlayingMovies(data.movie)
+        }
+      
+    } catch (error) {
+      console.error('Erroe fechting moveas:', error)
+    }
   };
   const handleDateTimeAdd =()=>{
     if(!dateTimeInput) return;
