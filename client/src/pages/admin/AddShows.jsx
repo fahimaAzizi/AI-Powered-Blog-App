@@ -3,6 +3,8 @@ import Loading from "../../components/Loading";
 import { kConverter } from "../../lib/kConverter";
 import { StarIcon, CheckIcon, Trash2Icon as DeleteIcon } from "lucide-react";
 import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
+
 
 const AddShows = () => {
   const { axios, getToken, user } = useAppContext();
@@ -64,30 +66,24 @@ const handleSubmit = async () => {
       date,
       time,
     }));
-
-    const { data } = await axios.post('/api/show/add', {
-      movie: selectedMovies,
-      shows: showsInput,
-      price: showPrice,
-    });
-
-    if (data.success) {
-      toast.success('Show added successfully');
-      setDateTimeSelection({});
-      setSelectedMovie('');
-      setShowPrice('');
-    } else {
-      toast.error(data.message);
+    
+    const payload ={
+      movieId : selectedMovies,
+      showsInput,
+      showPrice: Number(showPrice)
     }
-  } catch (error) {
-    console.error(error);
-    toast.error('Something went wrong while adding the show');
-  } finally {
-    setAddingShow(false);
-  }
-};
 
+    const { data } = await axios.post('/api/show/add',payload,{headers: {
+      Authorization: `Beare ${await getToken()}`}});
 
+      if(data.success){
+        toast.success()
+      }
+   
+      } catch (error) {
+
+     }
+   }
   useEffect(() => {
     fetchNowPlayingMovies();
   }, []);
