@@ -56,7 +56,7 @@ const handleSubmit = async () => {
   try {
     setAddingShow(true);
 
-    if (!selectedMovie || Object.keys(dateTimeSelection).length === 0 || !showPrice) {
+    if (!selectedMovies || Object.keys(dateTimeSelection).length === 0 || !showPrice) {
       return toast.error('Missing required fields');
     }
 
@@ -66,10 +66,19 @@ const handleSubmit = async () => {
     }));
 
     const { data } = await axios.post('/api/show/add', {
-      movie: selectedMovie,
+      movie: selectedMovies,
       shows: showsInput,
       price: showPrice,
     });
+
+    if (data.success) {
+      toast.success('Show added successfully');
+      setDateTimeSelection({});
+      setSelectedMovie('');
+      setShowPrice('');
+    } else {
+      toast.error(data.message);
+    }
   } catch (error) {
     console.error(error);
     toast.error('Something went wrong while adding the show');
