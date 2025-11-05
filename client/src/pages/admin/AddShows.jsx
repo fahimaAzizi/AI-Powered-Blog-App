@@ -52,10 +52,37 @@ const AddShows = () => {
       return { ...prev, [date]: filteredTimes };
     });
   };
+const handleSubmit = async () => {
+  try {
+    setAddingShow(true);
+
+    if (!selectedMovie || Object.keys(dateTimeSelection).length === 0 || !showPrice) {
+      return toast.error('Missing required fields');
+    }
+
+    const showsInput = Object.entries(dateTimeSelection).map(([date, time]) => ({
+      date,
+      time,
+    }));
+
+    const { data } = await axios.post('/api/show/add', {
+      movie: selectedMovie,
+      shows: showsInput,
+      price: showPrice,
+    });
+  } catch (error) {
+    console.error(error);
+    toast.error('Something went wrong while adding the show');
+  } finally {
+    setAddingShow(false);
+  }
+};
+
 
   useEffect(() => {
     fetchNowPlayingMovies();
   }, []);
+
 
   return nowPlayingMovies.length > 0 ? (
     <>
