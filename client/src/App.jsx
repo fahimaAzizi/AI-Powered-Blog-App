@@ -33,15 +33,15 @@ const App = () => {
         <Route path='/movies/:id/:date' element={<SeatLayout/>} />
         <Route path='/MyBookings' element={<MyBookings/>} />
         <Route path='/favorite' element={<Favorite />} />
-        <Route path='/admin/*' element={ user ? <Layout/>:(
+        <Route path='/admin/*' element={ user ? <Layout/> : (
           <div className='min-h-screen flex justify-center items-center'>
             <SignIn fallbackRedirectUrl={'/admin'}/>
           </div>
         )}>
           <Route index element={<Dashboard/>}/>
-          <Route path='add-shows' element={<AddShows/>}/>
-          <Route path='list-shows' element={<ListShows/>}/>
-          <Route path='list-bookings' element={<ListBookings/>}/>
+          <Route path="add-shows" element={<AddShows/>}/>
+          <Route path="list-shows" element={<ListShows/>}/>
+          <Route path="list-bookings" element={<ListBookings/>}/>
         </Route>
       </Routes>
       {!isAdminRoute && <Footer />}
