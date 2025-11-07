@@ -3,14 +3,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import timeFormat from '../lib/timeFormat';
+import { useAppContext } from '../context/AppContext';
 
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
+  const { image_base_url} = useAppContext()
 
   return (
     <div className='flex flex-col justify-between p-3 bg-gray-800 rounded-2xl hover:-translate-y-1 transition duration-300 w-66'>
       <img
-        onClick={() => {
+        onClick={() => { image_base_url +
           navigate(`/movies/${movie.id}`);
           window.scrollTo(0, 0);
         }}
