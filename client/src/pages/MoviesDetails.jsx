@@ -7,19 +7,23 @@ import timeFormat from '../lib/timeFormat'
 import DateSelect from '../components/DateSelect'
 import MovieCard from '../components/MovieCard' // ✅ required import
 import Loading from '../components/Loading'
+import { useAppContext } from '../context/AppContext'
 
 const MoviesDetails = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [show, setShow] = useState(null)
+  const {shows , axios, getToken , user , fetchFavoriteMovies,fetchfavoriteMovies,
+    image_base_url} = useAppContext(b )
+   
 
   const getShow = async () => {
-    const foundShow = dummyShowsData.find(show => show._id === id)
-    if (!foundShow) return
-    setShow({
-      movie: foundShow,
-      dateTime: dummyDateTimeData
-    })
+    try {
+      const {data} = await axios.get(`/api/show/${id}`)
+    } catch (error) {
+      
+    }
+   
   }
 
   useEffect(() => {
