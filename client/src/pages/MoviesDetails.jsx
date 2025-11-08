@@ -8,6 +8,7 @@ import DateSelect from '../components/DateSelect'
 import MovieCard from '../components/MovieCard' // ✅ required import
 import Loading from '../components/Loading'
 import { useAppContext } from '../context/AppContext'
+import toast from 'react-hot-toast'
 
 const MoviesDetails = () => {
   const navigate = useNavigate()
@@ -20,11 +21,29 @@ const MoviesDetails = () => {
   const getShow = async () => {
     try {
       const {data} = await axios.get(`/api/show/${id}`)
+      if(data.success){
+        setShow(data)
+      }
     } catch (error) {
-      
+      console.log(error)
     }
    
   }
+  const handeFavorite = async () => {
+    try {
+      if(!user) return toast.error("pleas login to proced");
+      const {data} = await axios.post('/api/user/update-favorite',{movieId: id},
+        {headers : {Authorization : `Bearer ${await getToken()}`}})
+
+        if(data.success){
+          await fetchFavoriteMovies()
+          toast.success(data.message)
+        }
+      
+    } catch (error) {
+      
+    }
+ }
 
   useEffect(() => {
     getShow()
@@ -33,8 +52,8 @@ const MoviesDetails = () => {
   return show ? (
     <div className='px-6 md:px-16 lg:px-40 pt-[120px] md:pt-[200px]'>
       <div className='flex flex-col md:flex-row gap-8 max-w-6xl mx-auto'>
-        <img
-          src={show.movie.poster_path}
+        <img 
+          src={image_base_url + show.movie.poster_path}
           alt={show.movie.title}
           className='max-md:mx-auto rounded-xl h-104 max-w-70 object-cover'
         />
@@ -87,7 +106,7 @@ const MoviesDetails = () => {
       {/* ✅ Movie suggestions */}
       <p className='text-lg font-medium mt-20 mb-8'>You May Also Like</p>
       <div className='flex flex-wrap max-sm:justify-center gap-8'>
-        {dummyShowsData.slice(0, 4).map((movie, index) => (
+        {shows.slice(0, 4).map((movie, index) => (
           <MovieCard key={index} movie={movie} />
         ))}
       </div>
