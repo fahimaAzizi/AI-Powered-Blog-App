@@ -79,7 +79,7 @@ const MoviesDetails = () => {
               Watch Trailer
             </button>
             <a href="#dateSelect" className='text-blue-500 underline'>Buy Tickets</a>
-            <Heart className='w-5 h-5 text-red-500 cursor-pointer' />
+            <Heart className={`w-5 h-5 text-red-500 cursor-pointer ${favoriteMovies.find(movie => movie._id === id) ? 'fil-primary text-primary':""}`}/>
           </div>
         </div>
       </div>
