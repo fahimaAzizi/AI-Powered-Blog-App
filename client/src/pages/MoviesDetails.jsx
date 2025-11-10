@@ -15,7 +15,7 @@ const MoviesDetails = () => {
   const { id } = useParams()
   const [show, setShow] = useState(null)
   const {shows , axios, getToken , user , fetchFavoriteMovies,fetchfavoriteMovies,
-    image_base_url} = useAppContext(b )
+    image_base_url} = useAppContext()
    
 
   const getShow = async () => {
@@ -74,7 +74,7 @@ const MoviesDetails = () => {
             {show.movie.release_date.split('-')[0]}
           </p>
           <div className='flex gap-4 mt-4'>
-            <button className='flex items-center gap-2 bg-primary px-4 py-2 rounded text-white'>
+            <button onClick={handeFavorite} className='flex items-center gap-2 bg-primary px-4 py-2 rounded text-white'>
               <PlayCircleIcon className='w-5 h-5' />
               Watch Trailer
             </button>
