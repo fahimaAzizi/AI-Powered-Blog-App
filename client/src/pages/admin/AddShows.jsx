@@ -77,7 +77,8 @@ const handleSubmit = async () => {
       Authorization: `Beare ${await getToken()}`}});
 
       if(data.success){
-        toast.success()
+        toast.success(data.message)
+        setSelectedMoviesc 
       }
    
       } catch (error) {
