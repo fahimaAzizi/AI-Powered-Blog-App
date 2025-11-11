@@ -17,7 +17,7 @@ const MyBookings = () => {
 
   const getMyBookings = async () => {
     try {
-      
+      const {data}= await axios.get('/api/user/bookings',{id})
     } catch (error) {
       
     }
