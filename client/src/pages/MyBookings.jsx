@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import BlurCircle from "../components/BlurCircle";
 import { dummyBookingData } from "../assets/assets";
+import { useAppContext } from "../context/AppContext";
+
 
 const MyBookings = () => {
   const currency = import.meta.env.VITE_CURRENCY || "$"; // fallback if not set
+
+  const {shows , axios , getToken , user, fetchFavoriteMovies , favoriteMovies,
+    image_base_url} = useAppContext()
+  
 
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
