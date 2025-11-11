@@ -8,7 +8,7 @@ import { useAppContext } from "../context/AppContext";
 const MyBookings = () => {
   const currency = import.meta.env.VITE_CURRENCY || "$"; // fallback if not set
 
-  const {shows , axios , getToken , user, fetchFavoriteMovies , favoriteMovies,
+  const { axios , getToken , user , favoriteMovies,
     image_base_url} = useAppContext()
   
 
@@ -16,6 +16,11 @@ const MyBookings = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const getMyBookings = async () => {
+    try {
+      
+    } catch (error) {
+      
+    }
     // simulate fetching
     setTimeout(() => {
       setBookings(dummyBookingData);
