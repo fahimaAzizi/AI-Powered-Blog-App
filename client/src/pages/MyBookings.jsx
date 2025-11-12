@@ -30,8 +30,10 @@ const MyBookings = () => {
   }
 
   useEffect(() => {
+    if (user){
     getMyBookings();
-  }, []);
+  }
+  }, [user]);
   
 
   return !isLoading ? (
@@ -49,7 +51,7 @@ const MyBookings = () => {
         >
           <div className="flex flex-col md:flex-row">
             <img
-              src={item.show.movie.poster_path}
+              src={ image_base_url + item.show.movie.poster_path}
               alt={item.show.movie.title}
               className="aspect-video h-auto w-40 object-cover rounded-md"
             />
