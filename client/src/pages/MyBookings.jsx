@@ -24,14 +24,10 @@ const MyBookings = () => {
         setBookings(data.bookings)
       }
     } catch (error) {
-      
+      console.log(error)
     }
-    // simulate fetching
-    setTimeout(() => {
-      setBookings(dummyBookingData);
-      setIsLoading(false);
-    }, 500);
-  };
+    setIsLoading(false)
+  }
 
   useEffect(() => {
     getMyBookings();
