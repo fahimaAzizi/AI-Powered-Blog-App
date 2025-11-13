@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import BlurCircle from '../components/BlurCircle';
 import isoTimeFormat from '../lib/isoTimeFormat';
 import { dummyDateTimeData, dummyShowsData, assets } from '../assets/assets';
+import axios from 'axios';
 
 const SeatLayout = () => {
   const { id, date } = useParams();
@@ -65,6 +66,19 @@ const SeatLayout = () => {
       </div>
     </div>
   );
+
+  const getOccupiedSeats = async ()=>{
+     try {
+      const {data} = await axios.get(`/api/bopking/seats/${selectedTime.showId}`)
+      if (data.success) {
+        setSelectedSeats(data.occupiedSeats)
+      } else{
+        toast.error(data.message)
+      }
+     } catch (error) {
+      console.log(error)
+     }
+  }
 
   if (!show) return <Loading />;
 
