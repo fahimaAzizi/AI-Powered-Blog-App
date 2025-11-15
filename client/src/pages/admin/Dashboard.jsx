@@ -45,10 +45,26 @@ const Dashboard = () => {
       icon: UsersIcon,
     },
   ];
+  
+  
 
   const fetchDashboardData = async () => {
-    setDashboardData(dummyDashboardData);
+    try {
+      const { data } = axios.get("/api/admin/dashboard", {
+  headers: {
+    Authorization: `Bearer ${await getToken()}`
+  }
+});if (data.success){
+   setDashboardData(dummyDashboardData);
     setLoading(false);
+  }else{
+    toast.error(data.message)
+  }
+    } catch (error) {
+      toast.error("Error feching dashboard data:",error)
+      
+    }
+    
   };
 
   useEffect(() => {
