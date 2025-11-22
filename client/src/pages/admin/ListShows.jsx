@@ -23,8 +23,11 @@ const ListShows = () => {
  }
 
   useEffect(() => {
-    getAllShows();
-  }, []);
+    if(user){
+       getAllShows();
+    }
+   
+  }, [user]);
 
   return !loading ? (
     <>
