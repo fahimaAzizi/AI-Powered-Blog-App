@@ -12,6 +12,7 @@ const ListShows = () => {
 
  const getAllShows =async ()=>{
   try{
+    const {data} = await axios.get("/api/admin/all-shows")
     setLoading(false);
   } catch(error){
       console.error(error)
