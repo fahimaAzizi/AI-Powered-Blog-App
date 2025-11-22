@@ -12,17 +12,6 @@ const ListShows = () => {
 
  const getAllShows =async ()=>{
   try{
-
-    setShows([{
-      movie : dummyShowsData[0],
-      showDateTime :"2025-06-30T02:30:00.000Z",
-      showPrice :59,
-      occupiedSeats:{
-        A1:"uaer_1",
-        B1:"uaer_2",
-        C1:"uaer_3"
-      }
-    }]);
     setLoading(false);
   } catch(error){
       console.error(error)
