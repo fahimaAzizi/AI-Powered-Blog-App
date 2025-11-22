@@ -1,12 +1,16 @@
-const currency =import.meta.env.VITE_CURRENCY
-import React, { cache, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import Title from "../../components/admin/Title";
 import { dummyShowsData } from "../../assets/assets";
 import { dateFormat } from "../../lib/dateFormat";
+import { useAppContext } from "../../context/AppContext";
 
 
 const ListShows = () => {
+  const currency =import.meta.env.VITE_CURRENCY
+
+  
+  const {axios,getToken,user} = useAppContext()
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
 
