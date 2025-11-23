@@ -22,15 +22,18 @@ const ListBookings = () => {
     try {
       const {data} = await axios.get("/api/admin/all-shows",{
       headers: {Authorization: `Bearer ${await getToken()}`}
-    })
+    });
+     seyBookings(data.bookings)
     } catch (error) {
-      
+      console.error(error);
     }
+    setLoading(false)
   };
    useEffect(()=>{
-    getAllBookings();
-
-   },[]);
+    if (user) {
+      getAllBookings();
+    }
+   },[user]);
 
   return ! isLoading ?(
     <>
