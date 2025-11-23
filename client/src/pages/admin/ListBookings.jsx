@@ -20,7 +20,9 @@ const ListBookings = () => {
 
   const getAllBookings = async () =>{
     try {
-      
+      const {data} = await axios.get("/api/admin/all-shows",{
+      headers: {Authorization: `Bearer ${await getToken()}`}
+    })
     } catch (error) {
       
     }
