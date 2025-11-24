@@ -16,7 +16,7 @@ const MovieCard = ({ movie }) => {
           navigate(`/movies/${movie.id}`);
           window.scrollTo(0, 0);
         }}
-        src={movie.backdrop_path}
+        src={image_base_url + backdrop_path}
         alt={movie.title}
         className='rounded-lg h-52 w-full object-cover object-right-bottom cursor-pointer'
       />
