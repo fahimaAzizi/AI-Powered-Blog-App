@@ -22,7 +22,7 @@ const MoviesDetails = () => {
     try {
       const {data} = await axios.get(`/api/show/${id}`)
       if(data.success){
-        setShow(data)
+        setShow(data) 
       }
     } catch (error) {
       console.log(error)
