@@ -3,6 +3,8 @@ import Loading from "../components/Loading";
 import BlurCircle from "../components/BlurCircle";
 import { dummyBookingData } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import timeFormat from '../lib/timeFormat'
+import dataFormat from '../lib/dateFormat'
 
 
 const MyBookings = () => {
@@ -57,9 +59,9 @@ const MyBookings = () => {
             />
             <div className="flex flex-col p-4">
               <p className="text-lg font-semibold">{item.show.movie.title}</p>
-              <p className="text-gray-400 text-sm">{item.show.movie.runtime}</p>
+              <p className="text-gray-400 text-sm">{timeFormat(item.show.movie.runtime)}</p>
               <p className="text-gray-400 text-sm mt-auto">
-                {item.show.showDateTime}
+               {dataFormat(item.show.showDateTime)}
               </p>
             </div>
           </div>
@@ -69,7 +71,7 @@ const MyBookings = () => {
               <p className="text-2xl font-semibold mb-3">
                 {currency}{item.amount}
               </p>
-              {!item.isPaid && (
+              {!item.isPaid && ( 
                 <button className="bg-primary px-4 py-1.5 mb-3 text-sm rounded-full font-medium cursor-pointer">
                   Pay Now
                 </button>
