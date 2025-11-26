@@ -8,6 +8,7 @@ import BlurCircle from '../components/BlurCircle';
 import isoTimeFormat from '../lib/isoTimeFormat';
 import { dummyDateTimeData, dummyShowsData, assets } from '../assets/assets';
 import axios from 'axios';
+import { useAppContext } from '../context/AppContext';
 
 const SeatLayout = () => {
   const { id, date } = useParams();
@@ -15,6 +16,9 @@ const SeatLayout = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [show, setShow] = useState(null);
   const navigate = useNavigate();
+
+
+  const {axios ,getToken , user} = useAppContext();
 
   const topRows = ['A', 'B'];         // Center top section
   const leftRows = ['C', 'D', 'E'];   // Left side of hall
