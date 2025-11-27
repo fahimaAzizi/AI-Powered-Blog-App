@@ -4,7 +4,8 @@ import BlurCircle from "../components/BlurCircle";
 import { dummyBookingData } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 import timeFormat from '../lib/timeFormat'
-import dataFormat from '../lib/dateFormat'
+import { dateFormat } from "../lib/dateFormat";
+
 
 
 const MyBookings = () => {
@@ -61,7 +62,7 @@ const MyBookings = () => {
               <p className="text-lg font-semibold">{item.show.movie.title}</p>
               <p className="text-gray-400 text-sm">{timeFormat(item.show.movie.runtime)}</p>
               <p className="text-gray-400 text-sm mt-auto">
-               {dataFormat(item.show.showDateTime)}
+               {dateFormat(item.show.showDateTime)}
               </p>
             </div>
           </div>
