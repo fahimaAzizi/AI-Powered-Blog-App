@@ -19,6 +19,17 @@ const SeatLayout = () => {
 
 
   const {axios ,getToken , user} = useAppContext();
+  const getShow = async()=>{
+    try {
+      const {data} = await axios.get(`/api/show/${id}`)
+      if (data.success){
+        setShow(data)
+      }
+    } catch (error) {
+      
+    }
+  }
+
 
   const topRows = ['A', 'B'];         // Center top section
   const leftRows = ['C', 'D', 'E'];   // Left side of hall
